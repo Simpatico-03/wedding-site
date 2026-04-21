@@ -1,0 +1,265 @@
+body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: #4a3f35;
+
+    /* base gradient */
+    background: radial-gradient(circle at top, #fdfbf7, #f3efe7);
+
+    /* rough watercolor paper texture */
+    background-image: 
+        url("https://www.transparenttextures.com/patterns/paper-fibers.png"),
+        url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+
+    background-blend-mode: multiply, overlay;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    
+    background: url("https://www.transparenttextures.com/patterns/palm-leaf.png");
+    opacity: 0.05;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    height: 100%;
+    
+    background: url("https://www.transparenttextures.com/patterns/palm-leaf.png");
+    opacity: 0.05;
+}
+
+.container {
+    text-align: center;
+    padding: 80px 20px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.verse {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8c7b6a;
+}
+
+.names {
+    font-size: 42px;
+    line-height: 1.4;
+    margin: 20px 0;
+}
+
+.and {
+    font-family: 'Great Vibes', cursive;
+    font-size: 50px;
+    color: #c6a86b;
+}
+
+.quote {
+    font-size: 16px;
+    margin: 20px 0 40px;
+    color: #6e5c4f;
+}
+
+.divider {
+    width: 60px;
+    height: 1px;
+    background-color: #c6a86b;
+    margin: 30px auto;
+}
+
+.invite-text {
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.date {
+    font-size: 20px;
+    margin: 20px 0 40px;
+    font-weight: 600;
+}
+
+/* ✨ Glowy RSVP button */
+.rsvp-btn {
+    padding: 14px 40px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #d4af37, #f5e6b2);
+    color: #4a3f35;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.rsvp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+}
+
+/* 🎀 Navigation Bar */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: rgba(253, 251, 247, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    border-bottom: 1px solid rgba(198, 168, 107, 0.2);
+}
+
+.nav-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 100%;
+    padding: 16px 20px;
+    margin: 0;
+}
+
+.navbar a {
+    color: #6e5c4f;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar a:hover {
+    color: #c6a86b;
+    background: rgba(198, 168, 107, 0.1);
+    transform: translateY(-2px);
+}
+
+/* RSVP Form Styles */
+.rsvp-form {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(253, 251, 247, 0.8);
+    border-radius: 15px;
+    border: 1px solid rgba(198, 168, 107, 0.2);
+    transition: all 0.3s ease;
+    scroll-margin-top: 110px;
+}
+
+.rsvp-form.hidden {
+    display: none;
+}
+
+.rsvp-page {
+    padding-top: 60px;
+}
+
+.rsvp-form h2 {
+    font-size: 24px;
+    color: #4a3f35;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #6e5c4f;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(198, 168, 107, 0.3);
+    border-radius: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: #4a3f35;
+    background: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #c6a86b;
+    background: white;
+    box-shadow: 0 0 10px rgba(198, 168, 107, 0.15);
+}
+
+.submit-btn {
+    padding: 14px 40px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #d4af37, #f5e6b2);
+    color: #4a3f35;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    width: 100%;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+}
+
+.submit-btn:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
+}
+
+.form-status {
+    min-height: 22px;
+    margin: 18px 0 0;
+    font-size: 14px;
+    color: #6e5c4f;
+    text-align: center;
+}
+
+.form-status.success {
+    color: #547a4a;
+}
+
+.form-status.error {
+    color: #9b3f35;
+}
+
+.form-status.pending {
+    color: #8c7b6a;
+}

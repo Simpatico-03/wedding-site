@@ -1,18 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Karun & Richa</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karun & Richa</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html">Home</a>
+        <a href="#events">Events</a>
+        <a href="#dress-code">Dress Code</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="#travel">Travel</a>
+        <a href="#wedding-party">Wedding Party</a>
+        <a href="#faq">FAQ</a>
+    </div>
+</nav>
 
-  <section class="hero">
-    <h1>Karun Mathew Boban & Richa Ann Joseph</h1>
-    <h2>Corinthians 13:4–7</h2>
-    <p>"Love is patient and kind; love does not envy or boast; it is not arrogant or rude. It does not insist on its own way; it is not irritable or resentful; it does not rejoice at wrongdoing, but rejoices with the truth. Love bears all things, believes all things, hopes all things, endures all things."
-    </p>
-    <h2>Coming soon!</h2>
-  </section>
+
+    <div class="container">
+
+        <p class="verse">1 Corinthians 13:4–7</p>
+        <p class="quote">
+            "Love is patient and kind; love does not envy or boast; it is not arrogant or rude. It does not insist on its own way; it is not irritable or resentful; it does not rejoice at wrongdoing, but rejoices with the truth. Love bears all things, believes all things, hopes all things, endures all things."
+        </p>
+
+        <div class="divider"></div>
+
+        <h1 class="names">
+            Richa Ann Joseph <br>
+            <span class="and">&</span> <br>
+            Karun Matthew Boban
+        </h1>
+
+        <p class="invite-text">
+            Together with their families, invite you to celebrate their wedding
+        </p>
+  <div class="divider"></div>
+        <p class="date">
+            20 August 2026, <br>
+            Kerala, India
+        </p>
+
+        <button class="rsvp-btn" onclick="toggleForm()">RSVP</button>
+
+        <!-- RSVP Form -->
+        <div id="rsvp-form" class="rsvp-form hidden">
+            <h2>RSVP Form</h2>
+            <form data-rsvp-form>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" autocomplete="tel">
+                </div>
+
+                <div class="form-group">
+                    <label for="attendance">Will You Attend?</label>
+                    <select id="attendance" name="attendance" required>
+                        <option value="">Select...</option>
+                        <option value="Yes, I will attend">Yes, I will attend</option>
+                        <option value="No, I cannot attend">No, I cannot attend</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Select...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5+">5+</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Dietary Restrictions</label>
+                    <input type="text" id="dietary" name="dietary" placeholder="e.g., Vegetarian, Vegan">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message for the Couple</label>
+                    <textarea id="message" name="message" rows="3" placeholder="Share your warm wishes..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit RSVP</button>
+                <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="rsvp.js"></script>
 
 </body>
 </html>
