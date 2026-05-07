@@ -22,6 +22,7 @@ async function submitRsvp(event) {
   const form = event.currentTarget;
   const submitButton = form.querySelector("button[type='submit']");
   const formData = new FormData(form);
+  const attendance = formData.get("attendance");
 
   if (!RSVP_ENDPOINT) {
     setFormStatus(form, "RSVP is almost ready. Please add the Google Apps Script URL in rsvp.js.", "error");
@@ -42,6 +43,11 @@ async function submitRsvp(event) {
 
     form.reset();
     setFormStatus(form, "Thank you. Your RSVP has been received.", "success");
+    
+    // Trigger confetti if attending
+    if (attendance === "Yes, I will attend" && window.triggerConfetti) {
+      window.triggerConfetti();
+    }
   } catch (error) {
     setFormStatus(form, `Unable to submit RSVP. Error: ${error.message}`, "error");
   } finally {

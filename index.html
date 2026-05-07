@@ -5,108 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karun & Richa</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-inner">
         <a href="index.html">Home</a>
-        <a href="#events">Events</a>
-        <a href="#dress-code">Dress Code</a>
+        <div class="nav-item dropdown">
+            <a href="events.html">Events</a>
+            <div class="dropdown-menu" aria-label="Event links">
+                <a href="events.html#holy-matrimony">Holy Matrimony</a>
+                <a href="events.html#dinner-reception">Dinner Reception</a>
+            </div>
+        </div>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
         <a href="rsvp.html">RSVP</a>
-        <a href="#travel">Travel</a>
-        <a href="#wedding-party">Wedding Party</a>
-        <a href="#faq">FAQ</a>
+        <a href="wedding-party.html">Wedding Party</a>
+        <a href="faq.html">FAQ</a>
     </div>
 </nav>
 
+<main class="home-page">
+    <section class="parallax-hero" id="home" aria-label="Wedding homepage">
+        <div class="hero-wash hero-wash-blush" aria-hidden="true"></div>
+        <div class="hero-wash hero-wash-forest" aria-hidden="true"></div>
 
-    <div class="container">
+        <div class="parallax-layer parallax-mist" data-speed="0.08" aria-hidden="true"></div>
+        <div class="parallax-layer parallax-hills" data-speed="0.16" aria-hidden="true"></div>
+        <div class="parallax-layer parallax-church" data-speed="0.24" aria-hidden="true"></div>
+        <div class="parallax-layer parallax-palms-back" data-speed="0.34" aria-hidden="true"></div>
+        <div class="parallax-layer parallax-palms-front" data-speed="0.48" aria-hidden="true"></div>
 
-        <p class="verse">1 Corinthians 13:4–7</p>
-        <p class="quote">
-            "Love is patient and kind; love does not envy or boast; it is not arrogant or rude. It does not insist on its own way; it is not irritable or resentful; it does not rejoice at wrongdoing, but rejoices with the truth. Love bears all things, believes all things, hopes all things, endures all things."
-        </p>
+        <div class="hero-content">
+            <p class="hero-verse reveal-item" style="--reveal-delay: 0ms;">1 Corinthians 13:4-7</p>
+            <p class="hero-quote reveal-item" style="--reveal-delay: 90ms;">
+                "Love is patient and kind; love does not envy or boast; it is not arrogant or rude. Love bears all things, believes all things, hopes all things, endures all things."
+            </p>
 
-        <div class="divider"></div>
+            <div class="hero-divider reveal-item" style="--reveal-delay: 180ms;"></div>
 
-        <h1 class="names">
-            Richa Ann Joseph <br>
-            <span class="and">&</span> <br>
-            Karun Matthew Boban
-        </h1>
+            <h1 class="hero-names reveal-item" style="--reveal-delay: 270ms;">
+                Richa Ann Joseph <br>
+                <span class="hero-and">&</span> <br>
+                Karun Matthew Boban
+            </h1>
 
-        <p class="invite-text">
-            Together with their families, invite you to celebrate their wedding
-        </p>
-  <div class="divider"></div>
-        <p class="date">
-            20 August 2026, <br>
-            Kerala, India
-        </p>
+            <p class="hero-invite-text reveal-item" style="--reveal-delay: 360ms;">
+                Together with their families, invite you to celebrate their wedding
+            </p>
 
-        <button class="rsvp-btn" onclick="toggleForm()">RSVP</button>
+            <p class="hero-date reveal-item" style="--reveal-delay: 450ms;">
+                20 August 2026<br>
+                Kerala, India
+            </p>
 
-        <!-- RSVP Form -->
-        <div id="rsvp-form" class="rsvp-form hidden">
-            <h2>RSVP Form</h2>
-            <form data-rsvp-form>
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" autocomplete="name" required>
+            <div class="countdown reveal-item" data-countdown style="--reveal-delay: 540ms;" aria-label="Countdown to the wedding day">
+                <div class="countdown-item">
+                    <strong data-countdown-value="days">000</strong>
+                    <span>Days</span>
                 </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" autocomplete="email" required>
+                <div class="countdown-item">
+                    <strong data-countdown-value="hours">00</strong>
+                    <span>Hours</span>
                 </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" autocomplete="tel">
+                <div class="countdown-item">
+                    <strong data-countdown-value="minutes">00</strong>
+                    <span>Minutes</span>
                 </div>
-
-                <div class="form-group">
-                    <label for="attendance">Will You Attend?</label>
-                    <select id="attendance" name="attendance" required>
-                        <option value="">Select...</option>
-                        <option value="Yes, I will attend">Yes, I will attend</option>
-                        <option value="No, I cannot attend">No, I cannot attend</option>
-                    </select>
+                <div class="countdown-item">
+                    <strong data-countdown-value="seconds">00</strong>
+                    <span>Seconds</span>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="guests">Number of Guests</label>
-                    <select id="guests" name="guests" required>
-                        <option value="">Select...</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5+">5+</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="dietary">Dietary Restrictions</label>
-                    <input type="text" id="dietary" name="dietary" placeholder="e.g., Vegetarian, Vegan">
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Message for the Couple</label>
-                    <textarea id="message" name="message" rows="3" placeholder="Share your warm wishes..."></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit RSVP</button>
-                <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-            </form>
+            <div class="hero-actions reveal-item" style="--reveal-delay: 630ms;">
+                <a href="rsvp.html" class="hero-rsvp-btn">RSVP</a>
+                <a href="events.html" class="hero-secondary-btn">View Events</a>
+            </div>
         </div>
+    </section>
+</main>
 
-    </div>
-
-    <script src="rsvp.js"></script>
-
+<script src="ambient.js"></script>
+<script src="parallax.js"></script>
 </body>
 </html>

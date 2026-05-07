@@ -11,12 +11,18 @@
 <nav class="navbar">
     <div class="nav-inner">
         <a href="index.html">Home</a>
-        <a href="index.html#events">Events</a>
-        <a href="index.html#dress-code">Dress Code</a>
+        <div class="nav-item dropdown">
+            <a href="events.html">Events</a>
+            <div class="dropdown-menu" aria-label="Event links">
+                <a href="events.html#holy-matrimony">Holy Matrimony</a>
+                <a href="events.html#dinner-reception">Dinner Reception</a>
+            </div>
+        </div>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
         <a href="rsvp.html">RSVP</a>
-        <a href="index.html#travel">Travel</a>
-        <a href="index.html#wedding-party">Wedding Party</a>
-        <a href="index.html#faq">FAQ</a>
+        <a href="wedding-party.html">Wedding Party</a>
+        <a href="faq.html">FAQ</a>
     </div>
 </nav>
 
@@ -67,7 +73,7 @@
             </div>
             <div class="form-group">
                 <label for="message">Message for the Couple</label>
-                <textarea id="message" name="message" rows="3" placeholder="Share your warm wishes..."></textarea>
+                <textarea id="message" name="message" rows="3" placeholder="Share a message with Richa & Karun..."></textarea>
             </div>
             <button type="submit" class="submit-btn">Submit RSVP</button>
             <p class="form-status" data-form-status role="status" aria-live="polite"></p>
@@ -76,5 +82,6 @@
 </main>
 
 <script src="rsvp.js"></script>
+<script src="ambient.js"></script>
 </body>
 </html>
