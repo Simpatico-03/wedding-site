@@ -5,128 +5,209 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dress Code | Richa & Karun</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .dc-section {
+            background-color: var(--ivory);
+            padding: 80px 60px;
+            font-family: 'Jost', sans-serif;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        .dc-corner {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            pointer-events: none;
+            opacity: 0.72;
+        }
+
+        .dc-corner-tl {
+            top: 0;
+            left: 0;
+        }
+
+        .dc-corner-br {
+            bottom: 0;
+            right: 0;
+            transform: scaleX(-1);
+        }
+
+        /* TOP HALF */
+        .dc-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto 80px;
+        }
+
+        .dc-event-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(48px, 6vw, 76px);
+            color: var(--burgundy);
+            margin: 0 0 16px;
+            line-height: 1.05;
+            font-weight: 400;
+        }
+
+        .dc-vibe-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            margin: 0 0 16px;
+        }
+
+        .dc-body {
+            font-size: 15px;
+            line-height: 1.85;
+            color: var(--text-mid);
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .dc-illustration {
+            width: 100%;
+            max-width: 480px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        /* BOTTOM HALF */
+        .dc-bottom {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .dc-bottom-text .dc-dinner-title {
+            text-align: left;
+            margin-bottom: 12px;
+        }
+
+        .dc-swatches {
+            display: grid;
+            grid-template-columns: repeat(3, 56px);
+            gap: 14px;
+        }
+
+        .dc-swatch {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+        }
+
+        .dc-dinner-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(40px, 5vw, 64px);
+            color: var(--burgundy);
+            margin: 0 0 10px;
+            line-height: 1.05;
+            font-weight: 400;
+        }
+
+        @media (max-width: 680px) {
+            .dc-section {
+                padding: 60px 24px;
+            }
+            .dc-top,
+            .dc-bottom {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .dc-corner {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-inner">
-        <a href="index.html">Home</a>
-        <div class="nav-item dropdown">
+        <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
             <a href="events.html">Events</a>
-            <div class="dropdown-menu" aria-label="Event links">
-                <a href="events.html#holy-matrimony">Holy Matrimony</a>
-                <a href="events.html#dinner-reception">Dinner Reception</a>
-            </div>
+            <a href="dress-code.html">Dress Code</a>
+            <a href="travel.html">Travel</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
         </div>
-        <a href="dress-code.html">Dress Code</a>
-        <a href="travel.html">Travel</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="wedding-party.html">Wedding Party</a>
-        <a href="faq.html">FAQ</a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
     </div>
 </nav>
 
-<main class="dress-code-page">
-    <section class="dress-code-hero">
-        <p class="verse">Colour & Style Guide</p>
-        <h1 class="names">Dress Code</h1>
-        <p class="invite-text">Hover over each colour to explore our palette</p>
-        <div class="divider"></div>
-    </section>
+<main>
+    <section class="dc-section">
+        <img src="assets/FloralGoldCorner1.png"  alt="" class="dc-corner dc-corner-tl" aria-hidden="true">
+        <img src="assets/FloralGoldCorner3.png" alt="" class="dc-corner dc-corner-br" aria-hidden="true">
 
-    <!-- Colour Swatches -->
-    <section class="swatches-container">
-        <!-- Burgundy -->
-        <div class="swatch burgundy-swatch">
-            <div class="swatch-circle" style="background: var(--burgundy);"></div>
-            <p class="swatch-label">Burgundy</p>
-            <div class="swatch-details">
-                <h3>Burgundy</h3>
-                <p><strong>Do Wear:</strong> Deep reds, maroons, wine shades. Pairs beautifully with gold accents.</p>
-                <p><strong>Don't Wear:</strong> Bright reds, neon, or overly casual cuts.</p>
-                <div class="swatch-images">
-                    <div class="inspo-img" style="background: url('https://images.unsplash.com/photo-1519676867240-f03562e3a481?w=300') center/cover;"></div>
-                </div>
+        <!-- TOP: Holy Matrimony -->
+        <div class="dc-top">
+            <div>
+                <h2 class="dc-event-title">Holy Matrimony</h2>
+                <p class="dc-vibe-label">The Vibe — Kerala Heirloom</p>
+                <p class="dc-body">Rich silks, soft florals, the warmth of a monsoon afternoon. Dress like you're attending something beautiful because you are. Sarees, lehengas, sherwanis, kurtas — all wonderful. And if you'd like to really lean into the Kerala spirit, a mundu (for the men) or a mundum neriyathum (the traditional two-piece for women) would be absolutely at home here.</p>
+            </div>
+            <div>
+                <img src="assets/DressCodeImage1.png" alt="Traditional Indian attire" class="dc-illustration">
             </div>
         </div>
 
-        <!-- Blush -->
-        <div class="swatch blush-swatch">
-            <div class="swatch-circle" style="background: var(--blush);"></div>
-            <p class="swatch-label">Blush</p>
-            <div class="swatch-details">
-                <h3>Blush</h3>
-                <p><strong>Do Wear:</strong> Soft pinks, rose gold, champagne. Elegant and romantic.</p>
-                <p><strong>Don't Wear:</strong> Hot pink, fluorescent shades.</p>
-                <div class="swatch-images">
-                    <div class="inspo-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300') center/cover;"></div>
-                </div>
+        <!-- BOTTOM: Swatches + Dinner copy + Dinner title -->
+        <div class="dc-bottom">
+            <div class="dc-swatches">
+                <div class="dc-swatch" style="background: #6B1A2A;" title="Burgundy"></div>
+                <div class="dc-swatch" style="background: #1C3D2E;" title="Forest Green"></div>
+                <div class="dc-swatch" style="background: #D4C5A9;" title="Sand"></div>
+                <div class="dc-swatch" style="background: #C4973A;" title="Gold"></div>
+                <div class="dc-swatch" style="background: #C9957A;" title="Blush"></div>
+                <div class="dc-swatch" style="background: #C4956A;" title="Terracotta"></div>
             </div>
-        </div>
 
-        <!-- Forest Green -->
-        <div class="swatch forest-swatch">
-            <div class="swatch-circle" style="background: var(--forest);"></div>
-            <p class="swatch-label">Forest</p>
-            <div class="swatch-details">
-                <h3>Forest Green</h3>
-                <p><strong>Do Wear:</strong> Deep greens, emerald, sage. Kerala-inspired natural tones.</p>
-                <p><strong>Don't Wear:</strong> Bright neon greens, lime shades.</p>
-                <div class="swatch-images">
-                    <div class="inspo-img" style="background: url('https://images.unsplash.com/photo-1578431494494-da591b8cff0f?w=300') center/cover;"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Ivory -->
-        <div class="swatch ivory-swatch">
-            <div class="swatch-circle" style="background: var(--ivory); border: 2px solid #ddd;"></div>
-            <p class="swatch-label">Ivory</p>
-            <div class="swatch-details">
-                <h3>Ivory</h3>
-                <p><strong>Do Wear:</strong> Cream, off-white, champagne. Timeless and elegant.</p>
-                <p><strong>Don't Wear:</strong> Pure white (reserved for bride), heavy fabrics.</p>
-                <div class="swatch-images">
-                    <div class="inspo-img" style="background: url('https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=300') center/cover;"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gold -->
-        <div class="swatch gold-swatch">
-            <div class="swatch-circle" style="background: var(--gold);"></div>
-            <p class="swatch-label">Gold</p>
-            <div class="swatch-details">
-                <h3>Gold</h3>
-                <p><strong>Do Wear:</strong> Metallic gold, warm neutrals with gold accents. Celebratory!</p>
-                <p><strong>Don't Wear:</strong> Silver or cool metallics.</p>
-                <div class="swatch-images">
-                    <div class="inspo-img" style="background: url('https://images.unsplash.com/photo-1595956297613-42f3aa77fb6f?w=300') center/cover;"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- General Dress Code Guidelines -->
-    <section class="dress-code-guidelines">
-        <h2>General Guidelines</h2>
-        <div class="guidelines-grid">
-            <div class="guideline-card">
-                <h3>Formal Events</h3>
-                <p>Holy Matrimony & Dinner Reception call for elegant, well-fitted formal wear. Think cocktail dresses, sarees, sherwanis, and suits.</p>
-            </div>
-            <div class="guideline-card">
-                <h3>Fabrics</h3>
-                <p>Silk, satin, linen, and cotton blends. Kerala's tropical climate calls for breathable, quality fabrics.</p>
-            </div>
-            <div class="guideline-card">
-                <h3>Accessories</h3>
-                <p>Gold jewelry preferred. Minimal, elegant pieces that complement your outfit without overwhelming.</p>
+            <div class="dc-bottom-text">
+                <h2 class="dc-dinner-title">Dinner Reception</h2>
+                <p class="dc-vibe-label">The Vibe — Glitz &amp; Glamour</p>
+                <p class="dc-body">The sun has set, the lights are on, and it's time to shine. This is your chance to pull out all the stops. Think gold, silk that catches the light, and every bit of glam you've been saving for a special occasion. Dress like the celebration it is!</p>
             </div>
         </div>
     </section>
 </main>
 
+<footer class="site-footer">
+    <div class="footer-palms" aria-hidden="true"></div>
+    <p class="footer-names">Richa <span>&</span> Karun</p>
+    <p class="footer-date">20 August 2026</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+</footer>
+
 <script src="dress-code.js"></script>
+<script src="scripts.js"></script>
+<!-- corner florals handled by dc-corner abs-positioned images in the section -->
 </body>
 </html>

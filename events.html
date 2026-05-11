@@ -5,140 +5,316 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events | Richa & Karun</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .events-section {
+            background-color: var(--forest);
+            padding: 80px 60px;
+            font-family: 'Jost', sans-serif;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .ev-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .ev-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(34px, 5vw, 52px);
+            color: var(--gold);
+            margin: 0 0 8px;
+            letter-spacing: 0.02em;
+            font-weight: 400;
+            background: linear-gradient(110deg, #8C6418 0%, #C4973A 22%, #F0D888 48%, #C4973A 72%, #8C6418 88%, #D4A848 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ev-location {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin: 0;
+        }
+
+        .ev-columns {
+            display: grid;
+            grid-template-columns: 1fr 2px 1fr;
+            gap: 0 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .ev-divider {
+            background: rgba(196, 151, 58, 0.35);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ev-divider::after {
+            content: none;
+        }
+
+        .ev-divider-img {
+            width: 72px;
+            height: auto;
+            opacity: 0.8;
+            background: var(--forest);
+            padding: 6px 0;
+            position: absolute;
+        }
+
+        .ev-card {
+            padding: 0 16px;
+            position: relative;
+        }
+
+        .events-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('assets/EventsBGIcon.png') center center / 100% auto no-repeat;
+            opacity: 0.38;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ev-columns { position: relative; z-index: 1; }
+        .ev-header  { position: relative; z-index: 1; }
+
+        .ev-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(38px, 5vw, 60px);
+            color: var(--gold);
+            margin: 0 0 32px;
+            line-height: 1.1;
+            font-weight: 400;
+            background: linear-gradient(110deg, #8C6418 0%, #C4973A 22%, #F0D888 48%, #C4973A 72%, #8C6418 88%, #D4A848 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ev-meta {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .ev-meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .ev-meta-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 3px;
+            filter: brightness(0) invert(1);
+            opacity: 0.75;
+        }
+
+        .ev-meta-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .ev-meta-value {
+            font-size: 15px;
+            color: var(--ivory-warm);
+            font-weight: 400;
+            font-family: 'Jost', sans-serif;
+        }
+
+        .ev-body {
+            font-size: 15px;
+            line-height: 1.85;
+            color: var(--ivory-warm);
+            opacity: 0.88;
+            margin-bottom: 36px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+        }
+
+        .ev-btn {
+            display: inline-block;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            padding: 11px 26px;
+            border-radius: 100px;
+            font-family: 'Jost', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        .ev-btn:hover {
+            background: var(--gold);
+            color: var(--forest);
+        }
+
+        @media (max-width: 768px) {
+            .events-section {
+                padding: 60px 24px;
+            }
+            .ev-columns {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .ev-divider {
+                height: auto;
+                width: 100%;
+                margin: 40px 0;
+                flex-direction: row;
+            }
+            .ev-card {
+                padding: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-inner">
-        <a href="index.html">Home</a>
-        <div class="nav-item dropdown">
+        <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
             <a href="events.html">Events</a>
-            <div class="dropdown-menu" aria-label="Event links">
-                <a href="#holy-matrimony">Holy Matrimony</a>
-                <a href="#dinner-reception">Dinner Reception</a>
-            </div>
+            <a href="dress-code.html">Dress Code</a>
+            <a href="travel.html">Travel</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
         </div>
-        <a href="dress-code.html">Dress Code</a>
-        <a href="travel.html">Travel</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="wedding-party.html">Wedding Party</a>
-        <a href="faq.html">FAQ</a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
     </div>
 </nav>
 
-<main class="events-page">
-    <section class="events-hero">
-        <p class="verse">Thursday, August 20, 2026</p>
-        <h1 class="names">Wedding Events</h1>
-        <p class="invite-text">Click each card to flip and explore</p>
-        <div class="divider"></div>
-    </section>
+<main>
+    <div class="botanical-layer botanical-layer-side botanical-layer-side-left" aria-hidden="true"></div>
+    <div class="botanical-layer botanical-layer-side botanical-layer-side-right" aria-hidden="true"></div>
 
-    <!-- Flip Cards Section -->
-    <section class="flip-cards-container large">
-        <!-- Holy Matrimony Card -->
-        <div id="holy-matrimony" class="flip-card large">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <figure class="card-front-image">
-                        <img src="assets/salem-mar-thoma-church-sketch.png" alt="Salem Mar Thoma Church">
-                    </figure>
-                    <div class="card-front-content">
-                        <h2>Holy Matrimony</h2>
-                        <p class="card-date">Thursday, August 20, 2026</p>
-                    </div>
-                </div>
-                <div class="flip-card-back">
-                    <div class="card-back-content">
-                        <h3>Holy Matrimony</h3>
-                        <div class="card-details">
-                            <div class="detail-row">
-                                <span class="detail-icon" aria-hidden="true"></span>
-                                <div>
-                                    <span class="detail-label">Date</span>
-                                    <strong>Thursday, August 20, 2026</strong>
-                                </div>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-icon detail-icon-time" aria-hidden="true"></span>
-                                <div>
-                                    <span class="detail-label">Time</span>
-                                    <strong>2:00 PM - 3:30 PM</strong>
-                                </div>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-icon detail-icon-place" aria-hidden="true"></span>
-                                <div>
-                                    <span class="detail-label">Venue</span>
-                                    <strong>Salem Mar Thoma Church</strong>
-                                    <span>YMCA Road, Thumpamon, Pandalam, Kerala 689502</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-description">
-                            <p>In the Mar Thoma tradition, marriage is not just a ceremony. It is a covenant. A promise made before God, witnessed by the people who love you most.</p>
-                            <p>At the heart of our service is the exchange of vows, words spoken not just to each other, but offered upward. The groom will place the Manthrakodi, a sacred silk, over the bride's head, marking her formal entry into his family. He will then tie the Minnu around her neck: a gold pendant bearing a cross, strung on seven threads, each one a symbol of the sacred bond they are entering.</p>
-                            <p>Come and be part of this moment. Come and pray over us.</p>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Salem%20Mar%20Thoma%20Church%20YMCA%20Road%20Thumpamon%20Pandalam%20Kerala%20689502%20India" target="_blank" rel="noopener" class="map-pin-btn">Get Directions</a>
-                    </div>
-                </div>
-            </div>
+    <section class="events-section">
+        <div class="ev-header">
+            <p class="ev-date">20 August 2026</p>
+            <p class="ev-location">Kerala, India</p>
         </div>
 
-        <!-- Dinner Reception Card -->
-        <div id="dinner-reception" class="flip-card large">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <figure class="card-front-image">
-                        <img src="assets/eden-garden-reception-sketch.png" alt="Eden Garden Reception">
-                    </figure>
-                    <div class="card-front-content">
-                        <h2>Dinner Reception</h2>
-                        <p class="card-date">Thursday, August 20, 2026</p>
+        <div class="ev-columns">
+            <!-- LEFT: Holy Matrimony -->
+            <div class="ev-card">
+                <h2 class="ev-title">Holy Matrimony</h2>
+                <div class="ev-meta">
+                    <div class="ev-meta-item">
+                        <img src="assets/LocationIcon.png" alt="" class="ev-meta-icon" aria-hidden="true">
+                        <div>
+                            <span class="ev-meta-label">Venue</span>
+                            <span class="ev-meta-value">Salem Mar Thoma Church</span>
+                        </div>
+                    </div>
+                    <div class="ev-meta-item">
+                        <img src="assets/TimeIcon.png" alt="" class="ev-meta-icon" aria-hidden="true">
+                        <div>
+                            <span class="ev-meta-label">Time</span>
+                            <span class="ev-meta-value">2:30 PM</span>
+                        </div>
                     </div>
                 </div>
-                <div class="flip-card-back">
-                    <div class="card-back-content">
-                        <h3>Dinner Reception</h3>
-                        <div class="card-details">
-                            <div class="detail-row">
-                                <span class="detail-icon" aria-hidden="true"></span>
-                                <div>
-                                    <span class="detail-label">Date</span>
-                                    <strong>Thursday, August 20, 2026</strong>
-                                </div>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-icon detail-icon-time" aria-hidden="true"></span>
-                                <div>
-                                    <span class="detail-label">Time</span>
-                                    <strong>6:00 PM - 8:30 PM</strong>
-                                </div>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-icon detail-icon-place" aria-hidden="true"></span>
-                                <div>
-                                    <span class="detail-label">Venue</span>
-                                    <strong>Eden Garden</strong>
-                                    <span>State Highway 1, Kurampala Rd, Pandalam, Adoor, Kerala 689501</span>
-                                </div>
-                            </div>
+                <p class="ev-body">
+                    In the Mar Thoma tradition, the groom will place the Manthrakodi, a sacred silk, over the bride's head, marking her formal entry into his family. He will then tie the Minnu around her neck: a gold pendant bearing a cross, strung on seven threads, each one a symbol of the sacred bond they are entering.<br><br>
+                    Come and be part of this moment!
+                </p>
+                <div class="ev-btn-row">
+                    <a class="ev-btn" href="https://www.google.com/maps/search/?api=1&query=Salem+Mar+Thoma+Church+YMCA+Road+Thumpamon+Pandalam+Kerala+689502" target="_blank" rel="noopener">Get Directions</a>
+                    <a class="ev-btn-cal" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Holy+Matrimony+%E2%80%94+Richa+%26+Karun&dates=20260820T090000Z%2F20260820T103000Z&details=Salem+Mar+Thoma+Church,+YMCA+Road,+Thumpamon,+Pandalam,+Kerala+689502&location=Salem+Mar+Thoma+Church,+Pandalam,+Kerala" target="_blank" rel="noopener">
+                        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="1" x2="4" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="1" y1="6" x2="13" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+                        Add to Calendar
+                    </a>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="ev-divider" aria-hidden="true">
+                <img src="assets/GoldDivider.png" alt="" class="ev-divider-img">
+            </div>
+
+            <!-- RIGHT: Dinner Reception -->
+            <div class="ev-card">
+                <h2 class="ev-title">Dinner Reception</h2>
+                <div class="ev-meta">
+                    <div class="ev-meta-item">
+                        <img src="assets/LocationIcon.png" alt="" class="ev-meta-icon" aria-hidden="true">
+                        <div>
+                            <span class="ev-meta-label">Venue</span>
+                            <span class="ev-meta-value">Eden Gardens</span>
                         </div>
-                        <div class="card-description">
-                            <p>The vows have been spoken. The prayers have been offered. The Minnu has been tied.</p>
-                            <p>Now, we eat, we laugh, we dance, and we celebrate the way people who love each other should.</p>
-                            <p>The reception is the family tables, the raised glasses and the song that pulls everyone onto the floor. It's the moment you've been waiting for since you got the invitation.</p>
-                            <p>Come as you are. Stay as long as you like. The night is ours.</p>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Eden%20Garden%20State%20Highway%201%20Kurampala%20Rd%20Pandalam%20Adoor%20Kerala%20689501%20India" target="_blank" rel="noopener" class="map-pin-btn">Get Directions</a>
                     </div>
+                    <div class="ev-meta-item">
+                        <img src="assets/TimeIcon.png" alt="" class="ev-meta-icon" aria-hidden="true">
+                        <div>
+                            <span class="ev-meta-label">Time</span>
+                            <span class="ev-meta-value">6:30 PM</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="ev-body">
+                    The vows have been spoken. The prayers have been offered. The Minnu has been tied.<br><br>
+                    Now, we eat, we laugh, we dance, and we celebrate the way people who love each other should.<br><br>
+                    Come as you are. Stay as long as you like. The night is ours.
+                </p>
+                <div class="ev-btn-row">
+                    <a class="ev-btn" href="https://www.google.com/maps/search/?api=1&query=Eden+Garden+State+Highway+1+Kurampala+Rd+Pandalam+Adoor+Kerala+689501" target="_blank" rel="noopener">Get Directions</a>
+                    <a class="ev-btn-cal" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Wedding+Dinner+Reception+%E2%80%94+Richa+%26+Karun&dates=20260820T130000Z%2F20260820T153000Z&details=Eden+Gardens,+State+Highway+1,+Kurampala+Rd,+Pandalam,+Adoor,+Kerala+689501&location=Eden+Gardens,+Pandalam,+Kerala" target="_blank" rel="noopener">
+                        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="1" x2="4" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="1" y1="6" x2="13" y2="6" stroke="currentColor" stroke-width="1"/></svg>
+                        Add to Calendar
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 </main>
 
-<script src="events.js"></script>
+<footer class="site-footer">
+    <div class="footer-palms" aria-hidden="true"></div>
+    <p class="footer-names">Richa <span>&</span> Karun</p>
+    <p class="footer-date">20 August 2026</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+</footer>
+
+<img src="assets/FloralGoldCorner.png" alt="" class="corner-floral corner-floral-tl" aria-hidden="true">
+<img src="assets/FloralGoldCorner1.png" alt="" class="corner-floral corner-floral-br" aria-hidden="true">
+<script src="scripts.js"></script>
 </body>
 </html>

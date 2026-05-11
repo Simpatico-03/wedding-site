@@ -1,4 +1,4 @@
-// Ambient Effects - Music Toggle & Time-of-Day Background
+﻿// Ambient Effects - Music Toggle & Time-of-Day Background
 
 // Music Toggle with Vinyl Record
 const audioContext = null;
@@ -11,7 +11,11 @@ function initMusicToggle() {
     musicToggle.id = 'music-toggle';
     musicToggle.innerHTML = `
         <button id="vinyl-record" class="vinyl-record" title="Toggle Music">
-            <span class="vinyl-dot"></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="8"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+                <path d="M12 4v2M12 18v2M4 12h2M18 12h2"></path>
+            </svg>
         </button>
     `;
     document.body.appendChild(musicToggle);
@@ -46,7 +50,7 @@ function updateBackgroundByTime() {
     
     if (hour >= 5 && hour < 12) {
         // Morning: Ivory
-        body.style.setProperty('--time-bg', 'rgba(253, 251, 247, 0.95)');
+        body.style.setProperty('--time-bg', 'rgba(247, 242, 234, 0.95)');
     } else if (hour >= 12 && hour < 17) {
         // Afternoon: Warm gold
         body.style.setProperty('--time-bg', 'rgba(245, 237, 220, 0.95)');
@@ -61,7 +65,7 @@ function updateBackgroundByTime() {
 
 // Confetti Animation
 function triggerConfetti() {
-    const colors = ['#6b2e2e', '#f4d5d0', '#d4af37']; // burgundy, blush, gold
+    const colors = ['#6B1A2A', '#C9957A', '#C4973A']; // burgundy, blush, gold
     const confettiCount = 50;
     
     for (let i = 0; i < confettiCount; i++) {

@@ -1,72 +1,78 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel | Richa & Karun</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-inner">
-        <a href="index.html">Home</a>
-        <div class="nav-item dropdown">
+        <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
             <a href="events.html">Events</a>
-            <div class="dropdown-menu" aria-label="Event links">
-                <a href="events.html#holy-matrimony">Holy Matrimony</a>
-                <a href="events.html#dinner-reception">Dinner Reception</a>
-            </div>
+            <a href="dress-code.html">Dress Code</a>
+            <a href="travel.html">Travel</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
         </div>
-        <a href="dress-code.html">Dress Code</a>
-        <a href="travel.html">Travel</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="wedding-party.html">Wedding Party</a>
-        <a href="faq.html">FAQ</a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
     </div>
 </nav>
 
 <main class="travel-page">
+    <div class="botanical-layer botanical-layer-hero" aria-hidden="true"></div>
+    <div class="botanical-layer botanical-layer-hero botanical-layer-right" aria-hidden="true"></div>
     <section class="travel-hero">
         <p class="verse">Welcome to Kerala</p>
         <h1 class="names">Travel Guide</h1>
-        <p class="invite-text">Getting to Pandalam - God's Own Country</p>
-        <div class="divider"></div>
+        <p class="invite-text">God's Own Country</p>
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true" style="margin-top: 16px;">
     </section>
 
     <!-- Getting There Section -->
     <section class="travel-section">
-        <h2>Getting There</h2>
+        <h2 class="section-title reveal" style="--i: 0;">Getting There</h2>
         <div class="travel-grid">
-            <div class="travel-card">
+            <div class="travel-card" style="--card-bg: url('assets/ByAir.png')">
                 <h3>By Air</h3>
-                <p><strong>Nearest Airport:</strong> Kottayam Airport (30 km away)</p>
-                <p><strong>Major Hub:</strong> Cochin International Airport (60 km away)</p>
-                <p>Book flights into either airport. From Cochin, it's a scenic 1.5-hour drive through Kerala's backwaters to Pandalam.</p>
-                <a href="https://www.google.com/maps/search/Cochin+International+Airport" target="_blank" class="travel-link">🔗 Cochin Airport Info</a>
+                <p><strong>Arrival Airport:</strong> Cochin International Airport (COK)</p>
+                <p>Book flights into Cochin. From there, it's a scenic 1.5-hour drive through Kerala's backwaters to Pandalam.</p>
+                <a href="https://www.google.com/maps/search/Cochin+International+Airport" target="_blank" class="travel-link"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.2-1.2"/></svg>Cochin Airport Info</a>
             </div>
 
-            <div class="travel-card">
+            <div class="travel-card" style="--card-bg: url('assets/ByRail.png')">
                 <h3>By Rail</h3>
                 <p><strong>Nearest Railway Station:</strong> Pandalam Railway Station</p>
                 <p>Kerala's rail network connects major cities. Check Indian Railways for train schedules to Pandalam.</p>
                 <p>From the station, it's about 15 minutes by car to the venue.</p>
-                <a href="https://www.google.com/maps/search/Pandalam+Railway+Station" target="_blank" class="travel-link">🔗 Pandalam Station</a>
+                <a href="https://www.google.com/maps/search/Pandalam+Railway+Station" target="_blank" class="travel-link"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.2-1.2"/></svg>Pandalam Station</a>
             </div>
 
-            <div class="travel-card">
+            <div class="travel-card" style="--card-bg: url('assets/ByRoad.png')">
                 <h3>By Car</h3>
                 <p><strong>From Cochin:</strong> 60 km, approximately 1.5 hours</p>
                 <p><strong>From Kottayam:</strong> 30 km, approximately 45 minutes</p>
                 <p>Hire a car or taxi. We recommend pre-booking to avoid last-minute hassles. The drive is beautiful!</p>
-                <a href="https://www.google.com/maps/search/Pandalam+Kerala" target="_blank" class="travel-link">🔗 View on Maps</a>
+                <a href="https://www.google.com/maps/search/Pandalam+Kerala" target="_blank" class="travel-link"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.2-1.2"/></svg>View on Maps</a>
             </div>
         </div>
     </section>
 
     <!-- Accommodation Section -->
+    <div style="text-align:center; padding: 8px 0;">
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
+    </div>
     <section class="travel-section">
-        <h2>Accommodation</h2>
+        <h2 class="section-title reveal" style="--i: 0;">Accommodation</h2>
         <p class="section-intro">Pandalam and nearby Kottayam offer excellent accommodation options for all budgets.</p>
         
         <div class="accommodation-list">
@@ -82,9 +88,10 @@
             <div class="accommodation-card">
                 <h3>Mid-Range</h3>
                 <ul>
-                    <li><strong>Pandalam Town Hotels</strong> - Close to the venue, comfortable stays</li>
-                    <li><strong>Kottayam Budget Hotels</strong> - Good value, 20-30 min from venue</li>
-                    <li><strong>Homestays</strong> - Authentic Kerala experience</li>
+                    <li><strong>Sreevalsam Residency</strong> — M C Road, Kulanada, Pandalam. Clean, comfortable rooms, ~3 km from venue. <a href="https://www.google.com/maps/search/?api=1&query=Sreevalsam+Residency+Kulanada+Pandalam+Kerala" target="_blank" rel="noopener">Get Directions</a></li>
+                    <li><strong>Pandalam Town Hotels</strong> — Close to the venue, comfortable stays</li>
+                    <li><strong>Kottayam Budget Hotels</strong> — Good value, 20–30 min from venue</li>
+                    <li><strong>Homestays</strong> — Authentic Kerala experience</li>
                 </ul>
             </div>
 
@@ -102,8 +109,11 @@
     </section>
 
     <!-- What to Pack Section -->
+    <div style="text-align:center; padding: 8px 0;">
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
+    </div>
     <section class="travel-section">
-        <h2>What to Pack</h2>
+        <h2 class="section-title reveal" style="--i: 0;">What to Pack</h2>
         <div class="packing-grid">
             <div class="packing-item">
                 <h4>Clothing</h4>
@@ -138,8 +148,11 @@
     </section>
 
     <!-- Local Info Section -->
+    <div style="text-align:center; padding: 8px 0;">
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
+    </div>
     <section class="travel-section">
-        <h2>Local Information</h2>
+        <h2 class="section-title reveal" style="--i: 0;">Local Information</h2>
         <div class="local-info-grid">
             <div class="info-card">
                 <h3>Best Time to Visit</h3>
@@ -150,7 +163,8 @@
 
             <div class="info-card">
                 <h3>Currency & Money</h3>
-                <p><strong>Currency:</strong> Indian Rupee (INR)</p>
+                <p><strong>AED:</strong> Many of our guests travelling from Dubai — 1 AED ≈ ₹23. ATMs widely available in Kochi and Thiruvanthapuram.</p>
+                <p><strong>INR:</strong> Indian Rupee (INR)</p>
                 <p>ATMs are widely available in Pandalam and Kottayam. Credit cards accepted at most establishments.</p>
                 <p>1 USD ≈ 83 INR (rates vary)</p>
             </div>
@@ -160,13 +174,6 @@
                 <p><strong>Local Language:</strong> Malayalam</p>
                 <p><strong>Also Spoken:</strong> English, Tamil, Hindi</p>
                 <p>Download Google Translate offline for convenience. Most hotel staff speak English.</p>
-            </div>
-
-            <div class="info-card">
-                <h3>Food & Dining</h3>
-                <p>Kerala cuisine is delicious! Try local specialties: appam, stew, fish curries, coconut rice.</p>
-                <p>Both vegetarian and non-vegetarian options available everywhere.</p>
-                <p>Water is safe to drink in hotels. Bottled water available everywhere.</p>
             </div>
 
             <div class="info-card">
@@ -184,8 +191,118 @@
             </div>
         </div>
     </section>
+
+    <div style="text-align:center; padding: 8px 0;">
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
+    </div>
+
+    <section class="travel-section food-dining-section">
+        <p class="section-eyebrow">Food & Dining</p>
+        <h2 class="section-title reveal" style="--i: 0;">A Taste of Kerala</h2>
+        <p class="section-intro">Kerala's food is built on coconut, spice, and centuries of tradition. Here is what to order, and what not to miss.</p>
+
+        <!-- Drinks highlight -->
+        <div class="food-drinks-bar reveal" style="--i: 0;">
+            <div class="drink-item">
+                <span class="drink-label">Fresh Coconut Water</span>
+                <p class="drink-desc">Sipped straight from the shell at every roadside stall. Cool, sweet, and the most natural thing in the world to drink in this heat.</p>
+            </div>
+            <div class="drink-item">
+                <span class="drink-label">Toddy (Kallu)</span>
+                <p class="drink-desc">Fermented coconut palm sap — cloudy, mildly alcoholic, best enjoyed cold at a local toddy shop alongside fried fish. An experience, not just a drink.</p>
+            </div>
+            <div class="drink-item">
+                <span class="drink-label">Sulaimani & Chaya</span>
+                <p class="drink-desc">Sulaimani is black tea with lime and spices — light, fragrant, the go-to after a heavy meal. Kerala chai (chaya) is the strong, frothy counterpart. Both essential.</p>
+            </div>
+        </div>
+
+        <div class="food-columns">
+            <!-- NON-VEG -->
+            <div class="food-column reveal" style="--i: 1;">
+                <h3 class="food-col-title">Non-Vegetarian</h3>
+                <ul class="food-list">
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Karimeen (Pearl Spot)</strong> — Kerala's prized freshwater fish, pan-fried or wrapped and slow-roasted in banana leaf. Find it near the backwaters. Nothing else tastes quite like it.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Beef Fry (Erachi Varattiyathu)</strong> — Slow-cooked, spiced, deeply caramelised beef. A Sunday staple in Kerala Christian homes, and absolutely unmissable. Served with appam or parotta.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Duck Mappas</strong> — Braised duck in a rich coconut milk curry with whole spices. A signature of the Syrian Christian kitchen — you will not find it done better anywhere.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Kottayam-style Fish Curry</strong> — Made with kudampuli (Malabar tamarind), producing a bold, tangy, deep-red curry entirely unique to this region.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Prawn Moilee</strong> — Prawns in a gentle coconut milk sauce, golden with turmeric. Delicate, coastal, and best eaten with appam.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Appam with Chicken Stew</strong> — Lacy rice hoppers soaking up a fragrant, mild coconut stew. The definitive Kerala breakfast.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- VEG -->
+            <div class="food-column reveal" style="--i: 2;">
+                <h3 class="food-col-title">Vegetarian</h3>
+                <ul class="food-list">
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Kerala Sadhya</strong> — A full vegetarian feast on a fresh banana leaf: rice, avial, olan, thoran, sambar, rasam, pickles, papadum, and payasam. Eaten with your right hand, as tradition calls for. The gold standard of Kerala cooking.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Puttu &amp; Kadala Curry</strong> — Steamed cylinders of rice flour and coconut, served with a boldly spiced black chickpea curry. The Keralite breakfast, done right.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Appam with Vegetable Stew</strong> — The same lacy hoppers, now paired with a mild coconut-based vegetable curry. Simple and perfect.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Unniyappam</strong> — Small, round, sweet rice fritters made with jaggery and banana. A temple snack found at every bakery. Once you start, you will not stop.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Kerala Banana Chips</strong> — Thinly sliced raw banana fried in coconut oil with a touch of salt. Kerala's great export and proudest snack.</span>
+                    </li>
+                    <li>
+                        <span class="food-dot"></span>
+                        <span><strong>Palada Payasam</strong> — A silky, cardamom-scented milk pudding with rice flakes. Rich, slow-cooked, and the fitting end to any meal here.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="accommodation-note"><strong>Where to eat:</strong> For the most authentic experience, ask any local for the nearest "meals hotel" or toddy shop. Hotel Sagar in Pandalam and any small bakery (kadas) near Kulanada are excellent starting points for Kerala meals and snacks.</p>
+    </section>
 </main>
 
+<footer class="site-footer">
+    <div class="footer-palms" aria-hidden="true"></div>
+    <p class="footer-names">Richa <span>&</span> Karun</p>
+    <p class="footer-date">20 August 2026</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+</footer>
+
+<img src="assets/FloralGoldCorner4.png" alt="" class="corner-floral corner-floral-tl" aria-hidden="true">
+<img src="assets/FloralGoldCorner.png" alt="" class="corner-floral corner-floral-br" aria-hidden="true">
 <script src="ambient.js"></script>
+<script src="scripts.js"></script>
 </body>
 </html>

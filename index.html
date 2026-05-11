@@ -1,32 +1,36 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karun & Richa</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-inner">
-        <a href="index.html">Home</a>
-        <div class="nav-item dropdown">
+        <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
             <a href="events.html">Events</a>
-            <div class="dropdown-menu" aria-label="Event links">
-                <a href="events.html#holy-matrimony">Holy Matrimony</a>
-                <a href="events.html#dinner-reception">Dinner Reception</a>
-            </div>
+            <a href="dress-code.html">Dress Code</a>
+            <a href="travel.html">Travel</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
         </div>
-        <a href="dress-code.html">Dress Code</a>
-        <a href="travel.html">Travel</a>
-        <a href="rsvp.html">RSVP</a>
-        <a href="wedding-party.html">Wedding Party</a>
-        <a href="faq.html">FAQ</a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
     </div>
 </nav>
 
 <main class="home-page">
+    <div class="botanical-layer botanical-layer-hero" aria-hidden="true"></div>
+    <div class="botanical-layer botanical-layer-hero botanical-layer-right" aria-hidden="true"></div>
     <section class="parallax-hero" id="home" aria-label="Wedding homepage">
         <div class="hero-wash hero-wash-blush" aria-hidden="true"></div>
         <div class="hero-wash hero-wash-forest" aria-hidden="true"></div>
@@ -37,30 +41,61 @@
         <div class="parallax-layer parallax-palms-back" data-speed="0.34" aria-hidden="true"></div>
         <div class="parallax-layer parallax-palms-front" data-speed="0.48" aria-hidden="true"></div>
 
+        <!-- Kerala Mar Thoma church arch sketch -->
+        <svg class="hero-church-svg" viewBox="0 0 480 620" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="240" y1="8" x2="240" y2="58" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="220" y1="28" x2="260" y2="28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M158 198 Q158 62 240 40 Q322 62 322 198" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="98" y1="198" x2="98" y2="600" stroke="currentColor" stroke-width="1.4"/>
+            <line x1="382" y1="198" x2="382" y2="600" stroke="currentColor" stroke-width="1.4"/>
+            <line x1="98" y1="198" x2="158" y2="198" stroke="currentColor" stroke-width="1.4"/>
+            <line x1="322" y1="198" x2="382" y2="198" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M98 198 Q98 148 132 132 Q158 148 158 198" stroke="currentColor" stroke-width="1.1"/>
+            <path d="M382 198 Q382 148 348 132 Q322 148 322 198" stroke="currentColor" stroke-width="1.1"/>
+            <line x1="128" y1="116" x2="128" y2="140" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="117" y1="126" x2="139" y2="126" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="352" y1="116" x2="352" y2="140" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="341" y1="126" x2="363" y2="126" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="240" cy="148" r="36" stroke="currentColor" stroke-width="1.2"/>
+            <circle cx="240" cy="148" r="21" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="240" y1="112" x2="240" y2="184" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="204" y1="148" x2="276" y2="148" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="215" y1="123" x2="265" y2="173" stroke="currentColor" stroke-width="0.6"/>
+            <line x1="265" y1="123" x2="215" y2="173" stroke="currentColor" stroke-width="0.6"/>
+            <path d="M138 420 L138 310 Q138 272 162 264 Q186 272 186 310 L186 420 Z" stroke="currentColor" stroke-width="1"/>
+            <path d="M294 420 L294 310 Q294 272 318 264 Q342 272 342 310 L342 420 Z" stroke="currentColor" stroke-width="1"/>
+            <path d="M192 600 L192 450 Q192 378 240 360 Q288 378 288 450 L288 600" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="240" y1="360" x2="240" y2="600" stroke="currentColor" stroke-width="0.8"/>
+            <line x1="98" y1="418" x2="382" y2="418" stroke="currentColor" stroke-width="0.7" opacity="0.6"/>
+            <line x1="158" y1="600" x2="322" y2="600" stroke="currentColor" stroke-width="1.8"/>
+            <line x1="128" y1="612" x2="352" y2="612" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+
         <div class="hero-content">
-            <p class="hero-verse reveal-item" style="--reveal-delay: 0ms;">1 Corinthians 13:4-7</p>
-            <p class="hero-quote reveal-item" style="--reveal-delay: 90ms;">
+            <img src="assets/WeddingLogo.png" alt="Richa & Karun" class="hero-logo reveal-item" style="--reveal-delay: 0s;">
+            <p class="hero-verse reveal-item" style="--reveal-delay: 0s;">1 Corinthians 13:4-7</p>
+            <p class="hero-quote reveal-item" style="--reveal-delay: 0.15s;">
                 "Love is patient and kind; love does not envy or boast; it is not arrogant or rude. Love bears all things, believes all things, hopes all things, endures all things."
             </p>
 
-            <div class="hero-divider reveal-item" style="--reveal-delay: 180ms;"></div>
+            <img src="assets/GoldDivider.png" alt="" class="gold-divider-img reveal-item" style="--reveal-delay: 0.3s;" aria-hidden="true">
 
-            <h1 class="hero-names reveal-item" style="--reveal-delay: 270ms;">
-                Richa Ann Joseph <br>
-                <span class="hero-and">&</span> <br>
-                Karun Matthew Boban
+            <h1 class="hero-names reveal-item" style="--reveal-delay: 0.3s;">
+                <span>Richa Ann Joseph</span>
+                <img src="assets/GoldAmpersand.png" alt="and" class="hero-and-img">
+                <span>Karun Boban Matthew</span>
             </h1>
 
-            <p class="hero-invite-text reveal-item" style="--reveal-delay: 360ms;">
+            <p class="hero-invite-text reveal-item" style="--reveal-delay: 0.45s;">
                 Together with their families, invite you to celebrate their wedding
             </p>
 
-            <p class="hero-date reveal-item" style="--reveal-delay: 450ms;">
+            <p class="hero-date reveal-item" style="--reveal-delay: 0.45s;">
                 20 August 2026<br>
                 Kerala, India
             </p>
 
-            <div class="countdown reveal-item" data-countdown style="--reveal-delay: 540ms;" aria-label="Countdown to the wedding day">
+            <div class="countdown reveal-item reveal" data-countdown style="--reveal-delay: 0.6s; --i: 0;" aria-label="Countdown to the wedding day">
                 <div class="countdown-item">
                     <strong data-countdown-value="days">000</strong>
                     <span>Days</span>
@@ -79,7 +114,7 @@
                 </div>
             </div>
 
-            <div class="hero-actions reveal-item" style="--reveal-delay: 630ms;">
+            <div class="hero-actions reveal-item" style="--reveal-delay: 0.6s;">
                 <a href="rsvp.html" class="hero-rsvp-btn">RSVP</a>
                 <a href="events.html" class="hero-secondary-btn">View Events</a>
             </div>
@@ -87,7 +122,25 @@
     </section>
 </main>
 
+<footer class="site-footer">
+    <div class="footer-palms" aria-hidden="true"></div>
+    <p class="footer-names">Richa <span>&</span> Karun</p>
+    <p class="footer-date">20 August 2026</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+</footer>
+
+<img src="assets/FloralGoldCorner3.png" alt="" class="corner-floral corner-floral-tl" aria-hidden="true">
+<img src="assets/FloralGoldCorner4.png" alt="" class="corner-floral corner-floral-br" aria-hidden="true">
 <script src="ambient.js"></script>
+<script src="scripts.js"></script>
 <script src="parallax.js"></script>
 </body>
 </html>

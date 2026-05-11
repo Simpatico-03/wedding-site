@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Richa & Karun</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .contact-page {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .contact-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            margin: 0 0 12px;
+        }
+
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(40px, 5vw, 60px);
+            color: var(--burgundy);
+            font-weight: 400;
+            margin: 0 0 16px;
+            line-height: 1.1;
+        }
+
+        .contact-subtitle {
+            font-size: 15px;
+            color: var(--text-mid);
+            font-weight: 300;
+            margin: 0;
+            max-width: 480px;
+        }
+
+        .contact-ornament {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            margin: 24px 0 0;
+        }
+
+        .contact-ornament-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            max-width: 860px;
+            width: 100%;
+        }
+
+        .contact-card {
+            background: var(--ivory);
+            border: 1px solid rgba(196, 151, 58, 0.2);
+            border-radius: 4px;
+            padding: 40px 36px;
+            position: relative;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 36px;
+            right: 36px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .contact-role {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 20px;
+        }
+
+        .contact-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(22px, 3vw, 28px);
+            color: var(--burgundy);
+            font-weight: 400;
+            margin: 0 0 24px;
+            line-height: 1.2;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .contact-detail-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            opacity: 0.7;
+        }
+
+        .contact-detail-label {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .contact-detail-value {
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .contact-detail-value a {
+            color: var(--burgundy);
+            text-decoration: none;
+        }
+
+        .contact-detail-value a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .contact-page {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="dress-code.html">Dress Code</a>
+            <a href="travel.html">Travel</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
+    </div>
+</nav>
+
+<main class="contact-page">
+    <div class="contact-header">
+        <p class="contact-eyebrow">Get in Touch</p>
+        <h1 class="contact-title">Contact Us</h1>
+        <p class="contact-subtitle">Feel free to reach out to the families for any questions about the wedding celebrations.</p>
+        <div class="contact-ornament">
+            <div class="contact-ornament-line"></div>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 1L7 13M1 7L13 7" stroke="#C4973A" stroke-width="1"/>
+            </svg>
+            <div class="contact-ornament-line"></div>
+        </div>
+    </div>
+
+    <div class="contact-grid">
+        <!-- Parents of Bride -->
+        <div class="contact-card">
+            <p class="contact-role">Parents of the Bride</p>
+            <h2 class="contact-name">Mrs. Geetha Joseph<br>&amp; Mr. Rejy Joseph</h2>
+
+            <div class="contact-detail">
+                <img src="assets/TimeIcon.png" alt="" class="contact-detail-icon" aria-hidden="true">
+                <div>
+                    <span class="contact-detail-label">Phone</span>
+                    <span class="contact-detail-value">
+                        <a href="tel:+919539426899">+91 9539 426 899</a><br>
+                        <a href="tel:+971551048601">+971 55 104 8601</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parents of Groom -->
+        <div class="contact-card">
+            <p class="contact-role">Parents of the Groom</p>
+            <h2 class="contact-name">Mrs. Susy Boban Mathew<br>&amp; Mr. Boban Mathew</h2>
+
+            <div class="contact-detail">
+                <img src="assets/TimeIcon.png" alt="" class="contact-detail-icon" aria-hidden="true">
+                <div>
+                    <span class="contact-detail-label">Phone</span>
+                    <span class="contact-detail-value">
+                        <a href="tel:+919496730890">+91 9496 730 890</a><br>
+                        <a href="tel:+971505510341">+971 50 551 0341</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="contact-detail">
+                <img src="assets/LocationIcon.png" alt="" class="contact-detail-icon" aria-hidden="true">
+                <div>
+                    <span class="contact-detail-label">Email</span>
+                    <span class="contact-detail-value">
+                        <a href="mailto:bobanmathew1@hotmail.com">bobanmathew1@hotmail.com</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-palms" aria-hidden="true"></div>
+    <p class="footer-names">Richa <span>&</span> Karun</p>
+    <p class="footer-date">20 August 2026</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+</footer>
+
+<img src="assets/FloralGoldCorner1.png" alt="" class="corner-floral corner-floral-tl" aria-hidden="true">
+<img src="assets/FloralGoldCorner4.png" alt="" class="corner-floral corner-floral-br" aria-hidden="true">
+<script src="scripts.js"></script>
+</body>
+</html>
