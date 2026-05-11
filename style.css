@@ -2940,6 +2940,7 @@ body::after {
 .travel-page > .travel-section:nth-of-type(even),
 .wedding-party-page > .party-section:nth-of-type(even) {
     background: var(--ivory-warm);
+    max-width: none;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     padding-left: calc(50vw - 50% + 20px);
@@ -2952,6 +2953,7 @@ body::after {
 .travel-page > .travel-section:nth-of-type(odd),
 .wedding-party-page > .party-section:nth-of-type(odd) {
     background: var(--ivory);
+    max-width: none;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     padding-left: calc(50vw - 50% + 20px);
@@ -3716,16 +3718,15 @@ li,
 
 /* Church arch sketch in hero */
 .hero-church-svg {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: min(560px, 70vw);
     height: auto;
-    opacity: 0.09;
+    opacity: 0.12;
     pointer-events: none;
-    z-index: 2;
-    color: var(--gold);
+    z-index: 0;
 }
 
 /* Gold divider image */
