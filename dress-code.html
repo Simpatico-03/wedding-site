@@ -7,129 +7,376 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        .dc-section {
+        .dc-page {
             background-color: var(--ivory);
-            padding: 80px 60px;
             font-family: 'Jost', sans-serif;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
         }
 
-        .dc-corner {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            pointer-events: none;
-            opacity: 0.72;
+        /* ── HERO ── */
+        .dc-hero {
+            text-align: center;
+            padding: 80px 24px 40px;
         }
-
-        .dc-corner-tl {
-            top: 0;
-            left: 0;
-        }
-
-        .dc-corner-br {
-            bottom: 0;
-            right: 0;
-            transform: scaleX(-1);
-        }
-
-        /* TOP HALF */
-        .dc-top {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto 80px;
-        }
-
-        .dc-event-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: clamp(48px, 6vw, 76px);
-            color: var(--burgundy);
-            margin: 0 0 16px;
-            line-height: 1.05;
-            font-weight: 400;
-        }
-
-        .dc-vibe-label {
+        .dc-hero-eyebrow {
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.22em;
+            letter-spacing: 0.26em;
             text-transform: uppercase;
-            color: var(--text-mid);
-            margin: 0 0 16px;
+            color: var(--gold);
+            margin: 0 0 14px;
         }
-
-        .dc-body {
-            font-size: 15px;
-            line-height: 1.85;
-            color: var(--text-mid);
-            font-weight: 300;
-            margin: 0;
-        }
-
-        .dc-illustration {
-            width: 100%;
-            max-width: 480px;
-            display: block;
-            border-radius: 4px;
-        }
-
-        /* BOTTOM HALF */
-        .dc-bottom {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 60px;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .dc-bottom-text .dc-dinner-title {
-            text-align: left;
-            margin-bottom: 12px;
-        }
-
-        .dc-swatches {
-            display: grid;
-            grid-template-columns: repeat(3, 56px);
-            gap: 14px;
-        }
-
-        .dc-swatch {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
-        }
-
-        .dc-dinner-title {
+        .dc-hero-title {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(40px, 5vw, 64px);
+            font-size: clamp(46px, 7vw, 78px);
             color: var(--burgundy);
-            margin: 0 0 10px;
+            margin: 0 0 16px;
             line-height: 1.05;
             font-weight: 400;
         }
+        .dc-hero-sub {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            margin: 0 0 22px;
+        }
+        .dc-disclaimer {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--text-mid);
+            font-weight: 300;
+            max-width: 540px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+        .dc-theme-note {
+            text-align: center;
+            padding: 20px 24px 44px;
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 14px;
+            color: var(--text-mid);
+            font-weight: 300;
+            line-height: 1.8;
+        }
 
-        @media (max-width: 680px) {
-            .dc-section {
-                padding: 60px 24px;
+        /* ── COLLAGE ROWS ── */
+        .dc-block {
+            display: flex;
+            align-items: stretch;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 0 80px;
+        }
+        /* Bride block: image left */
+        .dc-block--bride {
+            flex-direction: row;
+        }
+        /* Groom block: image right */
+        .dc-block--groom {
+            flex-direction: row-reverse;
+        }
+
+        /* ── IMAGE COLUMN ── */
+        .dc-img-col {
+            flex: 0 0 55%;
+            position: relative;
+            overflow: visible;
+            background: transparent;
+        }
+        .dc-collage {
+            width: 100%;
+            display: block;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            outline: none;
+            /* Dim via filter so only actual pixels are affected — no rectangle */
+            transition: filter 0.3s ease;
+            filter: drop-shadow(0 8px 32px rgba(74,15,28,0.10));
+        }
+        .dc-img-col.is-active .dc-collage {
+            filter: brightness(0.45) drop-shadow(0 8px 32px rgba(74,15,28,0.10));
+        }
+
+        /* ── HOTSPOT DOT ── */
+        .hs {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            cursor: pointer;
+        }
+        .hs-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            font-size: 0;
+            color: transparent;
+            transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Subtle coloured dots visible on all devices */
+        .hs--groom .hs-dot { background: rgba(192,96,128,0.38); box-shadow: 0 0 0 2px rgba(192,96,128,0.55); }
+        .hs--bride  .hs-dot { background: rgba(58,122,58,0.38);  box-shadow: 0 0 0 2px rgba(58,122,58,0.55); }
+
+        /* Active / hover state: white ring glow */
+        .hs.is-lit .hs-dot,
+        .hs:hover  .hs-dot {
+            background: rgba(255,255,255,0.28);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.8), 0 0 18px rgba(255,255,255,0.4);
+            transform: scale(1.25);
+        }
+
+        /* ── TOOLTIP ── */
+        .hs-tip {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(247,242,234,0.98);
+            border: 1px solid rgba(196,151,58,0.4);
+            border-radius: 4px;
+            padding: 9px 13px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.18s ease;
+            box-shadow: 0 4px 22px rgba(74,15,28,0.13);
+            z-index: 30;
+            min-width: 170px;
+            max-width: 220px;
+            white-space: normal;
+        }
+        .hs.is-lit .hs-tip,
+        .hs:hover  .hs-tip { opacity: 1; }
+
+        /* flip tooltip to bottom when near top edge */
+        .hs.tip-below .hs-tip {
+            bottom: auto;
+            top: calc(100% + 8px);
+        }
+        .hs.tip-below .hs-tip::after {
+            top: auto;
+            bottom: 100%;
+            border-top-color: transparent;
+            border-bottom-color: rgba(196,151,58,0.4);
+        }
+
+        .hs-tip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(196,151,58,0.4);
+        }
+        .hs-tip-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--burgundy);
+            font-family: 'Jost', sans-serif;
+            margin-bottom: 3px;
+        }
+        .hs-tip-sub {
+            display: block;
+            font-size: 11.5px;
+            font-weight: 300;
+            color: var(--text-mid);
+            font-family: 'Jost', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* ── TEXT COLUMN ── */
+        .dc-text-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 48px 56px;
+        }
+        .dc-side-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 10px;
+        }
+        .dc-color-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(38px, 4.5vw, 58px);
+            color: var(--burgundy);
+            margin: 0 0 20px;
+            line-height: 1.05;
+            font-weight: 400;
+        }
+        .dc-swatches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .dc-swatch {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+            transition: transform 0.2s;
+            cursor: default;
+        }
+        .dc-swatch:hover { transform: scale(1.12); }
+        .dc-body {
+            font-size: 15px;
+            line-height: 1.88;
+            color: var(--text-mid);
+            font-weight: 300;
+            margin: 0 0 18px;
+        }
+        .dc-attire-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .dc-attire-tag {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--burgundy);
+            border: 1px solid rgba(107,26,42,0.22);
+            padding: 5px 11px;
+            border-radius: 100px;
+        }
+        .dc-hs-hint {
+            font-size: 12px;
+            color: var(--text-mid);
+            font-weight: 300;
+            font-style: italic;
+            margin-top: 18px;
+        }
+
+        /* ── DIVIDER ── */
+        .dc-divider {
+            text-align: center;
+            padding: 8px 0 72px;
+        }
+
+        /* ── SHOPS ── */
+        .dc-shops {
+            background: var(--ivory-warm);
+            padding: 72px 60px;
+            text-align: center;
+        }
+        .dc-shops-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 12px;
+        }
+        .dc-shops-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(34px, 4.5vw, 52px);
+            color: var(--burgundy);
+            margin: 0 0 12px;
+            font-weight: 400;
+        }
+        .dc-shops-intro {
+            font-size: 15px;
+            color: var(--text-mid);
+            font-weight: 300;
+            max-width: 540px;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+        .dc-shops-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 28px;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .dc-shop-region {
+            background: var(--ivory);
+            border: 1px solid rgba(196,151,58,0.2);
+            border-radius: 4px;
+            padding: 30px 26px;
+            position: relative;
+        }
+        .dc-shop-region::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 26px;
+            right: 26px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .dc-shop-region-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 14px;
+        }
+        .dc-shop-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .dc-shop-list li {
+            font-size: 13.5px;
+            color: var(--text-mid);
+            font-weight: 300;
+            line-height: 1.6;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(196,151,58,0.1);
+        }
+        .dc-shop-list li:last-child { border-bottom: none; }
+        .dc-shop-list li strong {
+            display: block;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        .dc-shops-note {
+            font-size: 13px;
+            color: var(--text-mid);
+            font-style: italic;
+            font-weight: 300;
+            margin: 28px auto 0;
+            max-width: 540px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 860px) {
+            .dc-block,
+            .dc-block--bride,
+            .dc-block--groom {
+                flex-direction: column;
+                padding-bottom: 56px;
             }
-            .dc-top,
-            .dc-bottom {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .dc-corner {
-                width: 140px;
-                height: 140px;
-            }
+            .dc-img-col  { flex: none; width: 100%; }
+            /* Text comes first on mobile for both blocks */
+            .dc-text-col { order: -1; padding: 36px 28px; }
+            .dc-shops { padding: 52px 24px; }
+            .dc-shops-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 540px) {
+            .dc-hero { padding: 56px 20px 32px; }
+            .hs-dot { width: 28px; height: 28px; }
         }
     </style>
 </head>
@@ -139,6 +386,7 @@
         <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
         <div class="nav-links">
             <a href="index.html">Home</a>
+            <a href="our-story.html">Our Story</a>
             <a href="events.html">Events</a>
             <a href="dress-code.html">Dress Code</a>
             <a href="travel.html">Travel</a>
@@ -154,40 +402,212 @@
     </div>
 </nav>
 
-<main>
-    <section class="dc-section">
-        <img src="assets/FloralGoldCorner1.png"  alt="" class="dc-corner dc-corner-tl" aria-hidden="true">
-        <img src="assets/FloralGoldCorner3.png" alt="" class="dc-corner dc-corner-br" aria-hidden="true">
+<main class="dc-page">
+    <img src="assets/FloralGoldCorner1.png" alt="" class="corner-floral corner-floral-tl" aria-hidden="true">
+    <img src="assets/FloralGoldCorner3.png" alt="" class="corner-floral corner-floral-br" aria-hidden="true">
 
-        <!-- TOP: Holy Matrimony -->
-        <div class="dc-top">
-            <div>
-                <h2 class="dc-event-title">Holy Matrimony</h2>
-                <p class="dc-vibe-label">The Vibe — Kerala Heirloom</p>
-                <p class="dc-body">Rich silks, soft florals, the warmth of a monsoon afternoon. Dress like you're attending something beautiful because you are. Sarees, lehengas, sherwanis, kurtas — all wonderful. And if you'd like to really lean into the Kerala spirit, a mundu (for the men) or a mundum neriyathum (the traditional two-piece for women) would be absolutely at home here.</p>
-            </div>
-            <div>
-                <img src="assets/DressCodeImage1.png" alt="Traditional Indian attire" class="dc-illustration">
-            </div>
+    <!-- HERO -->
+    <section class="dc-hero">
+        <p class="dc-hero-eyebrow">Dress Code</p>
+        <h1 class="dc-hero-title">Celebrate in Colour</h1>
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true" style="margin: 16px auto 20px; display: block;">
+        <p class="dc-disclaimer">"These are suggestions — please don't feel limited. You're welcome to wear whatever makes you feel your best!"</p>
+    </section>
+
+    <p class="dc-theme-note">The colour theme carries through all events. There's no strict separation between the church wedding and reception — if you'd like to change between events, that's entirely your own choice.</p>
+
+    <!-- ═══════════════════════════════════════════════════
+         BRIDE'S SIDE — image anchored LEFT
+    ════════════════════════════════════════════════════ -->
+    <div class="dc-block dc-block--bride">
+
+        <!-- IMAGE + HOTSPOTS -->
+        <div class="dc-img-col" id="bride-img-col">
+            <img src="assets/BridesSideGreens-removebg-preview.png" alt="Bride's side — shades of green outfits" class="dc-collage">
+
+
+            <!-- Bride hotspots — colour: #3a7a3a -->
+
+            <div class="hs hs--bride tip-below" style="left:8%;top:5%"  data-n="1"  data-label="Charcoal + Forest Green Blazer" data-sub="Dark suit jacket over green shirt, mens western"></div>
+            <div class="hs hs--bride tip-below" style="left:22%;top:7%" data-n="2"  data-label="Olive Casual Polo Shirt" data-sub="Polo or oxford casual shirt, earthy olive, mens"></div>
+            <div class="hs hs--bride tip-below" style="left:38%;top:5%" data-n="3"  data-label="Hunter Green Oxford Shirt" data-sub="Smart casual button-down, deep hunter green, mens"></div>
+            <div class="hs hs--bride tip-below" style="left:55%;top:7%" data-n="4"  data-label="Sage Green Cowl-Neck Gown" data-sub="Draped cowl-neck maxi gown, sage green, western"></div>
+            <div class="hs hs--bride tip-below" style="left:70%;top:6%" data-n="5"  data-label="Embellished Bottle Green Gown" data-sub="Mother-of-bride embellished saree-gown, bottle green"></div>
+            <div class="hs hs--bride tip-below" style="left:82%;top:5%" data-n="6"  data-label="White Occasion Shirt (kids)" data-sub="Kids smart-casual white button shirt, neutral contrast"></div>
+            <div class="hs hs--bride tip-below" style="left:92%;top:8%" data-n="7"  data-label="Emerald Off-Shoulder Gown" data-sub="Full-length off-shoulder gown, rich emerald, western"></div>
+
+            <div class="hs hs--bride" style="left:18%;top:22%"  data-n="8"  data-label="Sage Green Casual Shirt" data-sub="Light sage green shirt, mens western smart-casual"></div>
+            <div class="hs hs--bride" style="left:35%;top:22%"  data-n="9"  data-label="Sage Green Flared Mother-Daughter Gown" data-sub="Matching flared midi gown, soft sage green"></div>
+            <div class="hs hs--bride" style="left:55%;top:20%"  data-n="10" data-label="Mint Frilly Girls Dress" data-sub="Girls ethnic-fusion dress, mint/sage with frill"></div>
+            <div class="hs hs--bride" style="left:70%;top:22%"  data-n="11" data-label="Forest Green Embroidered Lehenga" data-sub="Heavy embroidered lehenga + blouse, dark forest green"></div>
+            <div class="hs hs--bride" style="left:85%;top:23%"  data-n="12" data-label="Olive Tissue Saree Drape" data-sub="Silk georgette saree, olive-champagne with gold zari"></div>
+            <div class="hs hs--bride" style="left:95%;top:20%"  data-n="13" data-label="Sage Green Bridesmaid Gown" data-sub="Off-shoulder bridesmaid gown, sage green, western"></div>
+
+            <div class="hs hs--bride" style="left:8%;top:38%"   data-n="14" data-label="Dark Teal Mandarin Collar Kurta" data-sub="Slim-fit mandarin/nehru collar kurta, dark teal, mens"></div>
+            <div class="hs hs--bride" style="left:22%;top:40%"  data-n="15" data-label="Bottle Green Festive Kurta" data-sub="Rich bottle green mens festive kurta, ethnic"></div>
+            <div class="hs hs--bride" style="left:38%;top:38%"  data-n="16" data-label="Mint Green Kids Sharara Suit" data-sub="Girls ethnic sharara suit, mint with gold border"></div>
+            <div class="hs hs--bride" style="left:52%;top:40%"  data-n="17" data-label="Dark Emerald Kids Lehenga" data-sub="Kids lehenga choli, dark emerald with embroidery"></div>
+            <div class="hs hs--bride" style="left:65%;top:37%"  data-n="18" data-label="Green Shawl Dupatta Drape" data-sub="Womens casual ethnic with green shawl/dupatta"></div>
+            <div class="hs hs--bride" style="left:80%;top:40%"  data-n="19" data-label="Couple Emerald Kurta Set" data-sub="Couple coordinated dark green kurta + salwar"></div>
+
+            <div class="hs hs--bride" style="left:20%;top:57%"  data-n="20" data-label="Olive Green Mens Kurta" data-sub="Casual mandarin collar kurta, warm olive green"></div>
+            <div class="hs hs--bride" style="left:37%;top:58%"  data-n="21" data-label="Sage Green 3-Piece Suit" data-sub="Mens wedding suit — waistcoat + trousers, sage western"></div>
+            <div class="hs hs--bride" style="left:55%;top:57%"  data-n="22" data-label="Deep Forest Green Bridesmaid Gown" data-sub="Floor-length bridesmaid gown, forest green, western"></div>
+            <div class="hs hs--bride" style="left:72%;top:57%"  data-n="23" data-label="Emerald Green Blazer Set" data-sub="Mens emerald blazer + matching trousers, western"></div>
+            <div class="hs hs--bride" style="left:87%;top:58%"  data-n="24" data-label="Dark Green Father-Child Kurta Set" data-sub="Adult + child matching dark green kurta pajama"></div>
+
+            <div class="hs hs--bride" style="left:8%;top:75%"   data-n="25" data-label="White Mundu + Green Shirt" data-sub="Kerala traditional — white mundu + dark green shirt"></div>
+            <div class="hs hs--bride" style="left:28%;top:78%"  data-n="26" data-label="Forest Green Kanjeevaram Saree" data-sub="Heavy silk saree, dark forest green with gold zari"></div>
+            <div class="hs hs--bride" style="left:48%;top:78%"  data-n="27" data-label="Sage Tissue Silk Saree" data-sub="Light sage/silver-green tissue silk saree"></div>
+            <div class="hs hs--bride" style="left:65%;top:77%"  data-n="28" data-label="Olive Ruffled Pallu Saree" data-sub="Modern ruffled pallu saree, olive-khaki green"></div>
+            <div class="hs hs--bride" style="left:80%;top:80%"  data-n="29" data-label="Ivory White Evening Gown" data-sub="Clean white satin gown, neutral contrast, western"></div>
+
+            <div class="hs hs--bride" style="left:38%;top:92%"  data-n="30" data-label="Sage Floral Western Gown" data-sub="White + sage floral gown, western bridesmaid style"></div>
+            <div class="hs hs--bride" style="left:62%;top:92%"  data-n="31" data-label="Mint Embroidered Lehenga" data-sub="Pale mint lehenga choli with silver threadwork"></div>
+            <div class="hs hs--bride" style="left:82%;top:93%"  data-n="32" data-label="Olive-Gold Kids Lehenga" data-sub="Girls lehenga in olive-yellow-green with gold zari"></div>
         </div>
 
-        <!-- BOTTOM: Swatches + Dinner copy + Dinner title -->
-        <div class="dc-bottom">
+        <!-- TEXT -->
+        <div class="dc-text-col">
+            <span class="dc-side-label">Bride's Side</span>
+            <h2 class="dc-color-title">Shades of Green</h2>
             <div class="dc-swatches">
-                <div class="dc-swatch" style="background: #6B1A2A;" title="Burgundy"></div>
-                <div class="dc-swatch" style="background: #1C3D2E;" title="Forest Green"></div>
-                <div class="dc-swatch" style="background: #D4C5A9;" title="Sand"></div>
-                <div class="dc-swatch" style="background: #C4973A;" title="Gold"></div>
-                <div class="dc-swatch" style="background: #C9957A;" title="Blush"></div>
-                <div class="dc-swatch" style="background: #C4956A;" title="Terracotta"></div>
+                <div class="dc-swatch" style="background:#2D5A27;" title="Forest Green"></div>
+                <div class="dc-swatch" style="background:#3A5E38;" title="Bottle Green"></div>
+                <div class="dc-swatch" style="background:#3D6B48;" title="Emerald"></div>
+                <div class="dc-swatch" style="background:#5E7D40;" title="Olive Green"></div>
+                <div class="dc-swatch" style="background:#7B9E6B;" title="Sage Green"></div>
+                <div class="dc-swatch" style="background:#A8C5A0;" title="Mint Green"></div>
             </div>
-
-            <div class="dc-bottom-text">
-                <h2 class="dc-dinner-title">Dinner Reception</h2>
-                <p class="dc-vibe-label">The Vibe — Glitz &amp; Glamour</p>
-                <p class="dc-body">The sun has set, the lights are on, and it's time to shine. This is your chance to pull out all the stops. Think gold, silk that catches the light, and every bit of glam you've been saving for a special occasion. Dress like the celebration it is!</p>
+            <p class="dc-body">From deep forest and emerald to sage, mint, and zari — all shades of green are warmly welcome. Bridesmaids will be in gowns, so feel inspired. Whether Indian ethnic wear or western, the colour palette stays the same across all events.</p>
+            <div class="dc-attire-list">
+                <span class="dc-attire-tag">Sarees</span>
+                <span class="dc-attire-tag">Lehengas</span>
+                <span class="dc-attire-tag">Kurtas</span>
+                <span class="dc-attire-tag">Sherwanis</span>
+                <span class="dc-attire-tag">Gowns</span>
+                <span class="dc-attire-tag">Evening Dresses</span>
+                <span class="dc-attire-tag">Suits</span>
+                <span class="dc-attire-tag">Blazer Sets</span>
             </div>
         </div>
+    </div>
+
+    <div class="dc-divider">
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         GROOM'S SIDE — image anchored RIGHT
+    ════════════════════════════════════════════════════ -->
+    <div class="dc-block dc-block--groom">
+
+        <!-- IMAGE + HOTSPOTS -->
+        <div class="dc-img-col" id="groom-img-col">
+            <img src="assets/GroomSidePink-removebg-preview.png" alt="Groom's side — shades of pink outfits" class="dc-collage">
+
+
+            <!-- Groom hotspots — colour: #c06080 -->
+
+            <div class="hs hs--groom tip-below" style="left:10%;top:5%"   data-n="1"  data-label="Blush Pink Blazer" data-sub="Formal 2-piece suit, ivory-pink tone"></div>
+            <div class="hs hs--groom tip-below" style="left:28%;top:8%"   data-n="2"  data-label="Powder Pink Sherwani" data-sub="Embroidered mens ethnic wear, soft pink"></div>
+            <div class="hs hs--groom tip-below" style="left:52%;top:7%"   data-n="3"  data-label="Anarkali with Dupatta" data-sub="Flowy printed anarkali, pastel pink + teal dupatta"></div>
+            <div class="hs hs--groom tip-below" style="left:72%;top:6%"   data-n="4"  data-label="Dusty Pink Kurta Pajama" data-sub="Full-sleeve straight kurta, light pink"></div>
+            <div class="hs hs--groom tip-below" style="left:88%;top:8%"   data-n="5"  data-label="Lilac-Pink Kurta" data-sub="Nehru collar kurta, soft lilac-pink"></div>
+
+            <div class="hs hs--groom" style="left:7%;top:22%"   data-n="6"  data-label="Ivory-White Suit" data-sub="Western suit, off-white; pairs with pink accessories"></div>
+            <div class="hs hs--groom" style="left:88%;top:20%"  data-n="7"  data-label="Dhoti & Pink Kurta" data-sub="Kerala white dhoti + pink kurta, traditional"></div>
+
+            <div class="hs hs--groom" style="left:8%;top:37%"   data-n="8"  data-label="Hot Pink Casual Shirt" data-sub="Relaxed fit bright pink shirt, mens western"></div>
+            <div class="hs hs--groom" style="left:25%;top:38%"  data-n="9"  data-label="Rose Pink Gown" data-sub="Off-shoulder flutter-sleeve midi gown, rose pink"></div>
+            <div class="hs hs--groom" style="left:42%;top:40%"  data-n="10" data-label="Bubblegum Pink Salwar Suit" data-sub="Sleeveless embroidered kurti + churidar, vivid pink"></div>
+            <div class="hs hs--groom" style="left:58%;top:36%"  data-n="11" data-label="Blush Pink Salwar Set" data-sub="Long embroidered kurta + dupatta, soft blush"></div>
+            <div class="hs hs--groom" style="left:75%;top:38%"  data-n="12" data-label="Family Matching Pink Kurtas" data-sub="Father-son-daughter coordinated kurta set, pastel pink"></div>
+            <div class="hs hs--groom" style="left:90%;top:37%"  data-n="13" data-label="Deep Rose Pink Shirt" data-sub="Formal button-down deep rose shirt, mens western"></div>
+
+            <div class="hs hs--groom" style="left:8%;top:55%"   data-n="14" data-label="Peach-Pink Sharara Set" data-sub="Embroidered ethnic set, peach-pink tone, womens"></div>
+            <div class="hs hs--groom" style="left:28%;top:58%"  data-n="15" data-label="Blush Pink Maxi Slit Gown" data-sub="Western evening gown with thigh slit, ice blush"></div>
+            <div class="hs hs--groom" style="left:47%;top:57%"  data-n="16" data-label="Mauve Salwar Kameez" data-sub="Printed straight-cut suit, mauve-lavender pink"></div>
+            <div class="hs hs--groom" style="left:62%;top:53%"  data-n="17" data-label="Pink Silk Saree" data-sub="Woven zari silk saree, antique dusty rose-gold"></div>
+            <div class="hs hs--groom" style="left:82%;top:54%"  data-n="18" data-label="Deep Magenta Shirt" data-sub="Formal deep magenta button-down, mens western"></div>
+
+            <div class="hs hs--groom" style="left:30%;top:72%"  data-n="19" data-label="Blush Pink Formal Shirt" data-sub="Mens formal shirt + black trousers, soft pink"></div>
+            <div class="hs hs--groom" style="left:48%;top:75%"  data-n="20" data-label="Pale Pink Father-Child Kurta Set" data-sub="Coordinated pale pink kurta, father + child"></div>
+            <div class="hs hs--groom" style="left:64%;top:72%"  data-n="21" data-label="Dusty Rose Zari Saree" data-sub="Bridal silk saree, dusty rose with gold zari border"></div>
+
+            <div class="hs hs--groom" style="left:10%;top:82%"  data-n="22" data-label="Pastel Pink Couple Kurta Set" data-sub="Couple matching pastel pink kurta + lehenga skirt"></div>
+            <div class="hs hs--groom" style="left:30%;top:88%"  data-n="23" data-label="Peach Anarkali Lehenga" data-sub="Anarkali-style long skirt set, peach-blush"></div>
+            <div class="hs hs--groom" style="left:50%;top:86%"  data-n="24" data-label="Pearl White Floral Gown" data-sub="Western gown, pearl white + floral detailing"></div>
+            <div class="hs hs--groom" style="left:68%;top:87%"  data-n="25" data-label="Baby Pink Floral Kids Dress" data-sub="Kids pageant dress, baby pink with floral trim"></div>
+            <div class="hs hs--groom" style="left:83%;top:88%"  data-n="26" data-label="Pale Pink Evening Dress" data-sub="Womens western bodycon + deep pink saree"></div>
+        </div>
+
+        <!-- TEXT -->
+        <div class="dc-text-col">
+            <span class="dc-side-label">Groom's Side</span>
+            <h2 class="dc-color-title">Shades of Pink</h2>
+            <div class="dc-swatches">
+                <div class="dc-swatch" style="background:#F2A0B0;" title="Powder Pink"></div>
+                <div class="dc-swatch" style="background:#E8889A;" title="Blush Pink"></div>
+                <div class="dc-swatch" style="background:#D96E7E;" title="Rose Pink"></div>
+                <div class="dc-swatch" style="background:#F0C2CC;" title="Pearl Pink"></div>
+                <div class="dc-swatch" style="background:#C7768A;" title="Dusty Rose"></div>
+                <div class="dc-swatch" style="background:#B05070;" title="Deep Magenta"></div>
+            </div>
+            <p class="dc-body">From blush and powder pink to dusty rose and deep magenta — all shades of pink are welcome. Sherwanis, kurtas, lehengas, gowns, sarees — Indian ethnic or western, the colour theme stays the same throughout all events.</p>
+            <div class="dc-attire-list">
+                <span class="dc-attire-tag">Sherwanis</span>
+                <span class="dc-attire-tag">Kurtas</span>
+                <span class="dc-attire-tag">Lehengas</span>
+                <span class="dc-attire-tag">Sarees</span>
+                <span class="dc-attire-tag">Anarkalis</span>
+                <span class="dc-attire-tag">Gowns</span>
+                <span class="dc-attire-tag">Evening Dresses</span>
+                <span class="dc-attire-tag">Blazer Sets</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dc-divider">
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
+    </div>
+
+    <!-- SHOPS -->
+    <section class="dc-shops">
+        <p class="dc-shops-eyebrow">Where to Shop</p>
+        <h2 class="dc-shops-title">Find Your Outfit</h2>
+        <p class="dc-shops-intro">Whether you're shopping from India, Dubai, or the USA, here are some trusted places to find or stitch your perfect look.</p>
+
+        <div class="dc-shops-grid">
+            <div class="dc-shop-region">
+                <p class="dc-shop-region-title">India</p>
+                <ul class="dc-shop-list">
+                    <li><strong>Kalyan Silks (Kottayam / Kochi)</strong>Silks, sarees, and Kerala textiles — perfect for the occasion</li>
+                    <li><strong>FabIndia</strong>Handcrafted ethnic wear in natural fabrics — great for kurtas and dupattas</li>
+                    <li><strong>Malabar Gold &amp; Diamonds</strong>Accessories and jewellery to complete your look</li>
+                    <li><strong>Local tailors, Pandalam</strong>For custom stitching — any local tailor can match fabric to the colour theme</li>
+                </ul>
+            </div>
+            <div class="dc-shop-region">
+                <p class="dc-shop-region-title">Dubai</p>
+                <ul class="dc-shop-list">
+                    <li><strong>Meena Bazaar, Bur Dubai</strong>Extensive range of lehengas, sarees, and salwars in every colour</li>
+                    <li><strong>Karama Market</strong>Budget-friendly ethnic wear and fabric for custom tailoring</li>
+                    <li><strong>Ritu Kumar / W (Mall of Emirates)</strong>Contemporary Indian fashion — great for gowns with an ethnic touch</li>
+                    <li><strong>Dragon Mart Tailors</strong>Affordable custom stitching with a wide fabric selection</li>
+                </ul>
+            </div>
+            <div class="dc-shop-region">
+                <p class="dc-shop-region-title">USA</p>
+                <ul class="dc-shop-list">
+                    <li><strong>Utsav Fashion (online)</strong>Wide range of Indian ethnic wear shipped to the USA</li>
+                    <li><strong>Soch / Biba (online)</strong>Contemporary Indian wear, easy international shipping</li>
+                    <li><strong>BHLDN / Anthropologie</strong>For western-style gowns and evening dresses in pastel shades</li>
+                    <li><strong>Local Indian boutiques</strong>Most major US cities have Indian garment districts — check local listings</li>
+                </ul>
+            </div>
+        </div>
+        <p class="dc-shops-note">These are starting points — feel free to shop wherever you love. The colour and the joy you bring is what matters most.</p>
     </section>
 </main>
 
@@ -197,6 +617,7 @@
     <p class="footer-date">20 August 2026</p>
     <nav class="footer-nav" aria-label="Footer navigation">
         <a href="index.html">Home</a>
+        <a href="our-story.html">Our Story</a>
         <a href="events.html">Events</a>
         <a href="dress-code.html">Dress Code</a>
         <a href="travel.html">Travel</a>
@@ -208,6 +629,5 @@
 
 <script src="dress-code.js"></script>
 <script src="scripts.js"></script>
-<!-- corner florals handled by dc-corner abs-positioned images in the section -->
 </body>
 </html>

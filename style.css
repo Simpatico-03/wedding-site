@@ -2690,6 +2690,15 @@ body::after {
     color: var(--text-dark);
 }
 
+.food-section-img {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto 0;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
 .packing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -3696,7 +3705,7 @@ li,
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0;
+    gap: 16px;
     font-size: clamp(56px, 10vw, 112px) !important;
     line-height: 1.0 !important;
     letter-spacing: -0.01em;
