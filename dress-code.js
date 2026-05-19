@@ -22,17 +22,52 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Per-image-column activation */
     document.querySelectorAll('.dc-img-col').forEach(col => {
         const hotspots = col.querySelectorAll('.hs');
+
+        /* Build SVG ellipse overlay for this column */
+        const NS  = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('class', 'dc-hs-svg');
+        svg.setAttribute('viewBox', '0 0 100 100');
+        svg.setAttribute('preserveAspectRatio', 'none');
+        svg.setAttribute('aria-hidden', 'true');
+
+        hotspots.forEach(hs => {
+            const cx = parseFloat(hs.style.left)  || 50;
+            const cy = parseFloat(hs.style.top)   || 50;
+            const rx = parseFloat(hs.dataset.rx)  || 7;
+            const ry = parseFloat(hs.dataset.ry)  || 9;
+
+            const ellipse = document.createElementNS(NS, 'ellipse');
+            ellipse.setAttribute('cx', cx);
+            ellipse.setAttribute('cy', cy);
+            ellipse.setAttribute('rx', rx);
+            ellipse.setAttribute('ry', ry);
+            ellipse.setAttribute('vector-effect', 'non-scaling-stroke');
+            ellipse.dataset.n = hs.dataset.n;
+            svg.appendChild(ellipse);
+        });
+
+        col.appendChild(svg);
+
         let active = null;
+
+        function getEllipse(hs) {
+            return svg.querySelector(`ellipse[data-n="${hs.dataset.n}"]`);
+        }
 
         function light(hs) {
             if (active && active !== hs) dim(active);
             active = hs;
             hs.classList.add('is-lit');
             col.classList.add('is-active');
+            const el = getEllipse(hs);
+            if (el) el.classList.add('is-lit');
         }
 
         function dim(hs) {
             hs.classList.remove('is-lit');
+            const el = getEllipse(hs);
+            if (el) el.classList.remove('is-lit');
             if (active === hs) active = null;
             if (!col.querySelector('.hs.is-lit')) col.classList.remove('is-active');
         }
@@ -58,7 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.hs.is-lit').forEach(hs => {
                 hs.classList.remove('is-lit');
                 const col = hs.closest('.dc-img-col');
-                if (col) col.classList.remove('is-active');
+                if (col) {
+                    col.classList.remove('is-active');
+                    const svg = col.querySelector('.dc-hs-svg');
+                    if (svg) svg.querySelectorAll('ellipse.is-lit').forEach(el => el.classList.remove('is-lit'));
+                }
             });
         }
     });

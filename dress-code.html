@@ -128,8 +128,9 @@
         }
 
         /* Subtle coloured dots visible on all devices */
-        .hs--groom .hs-dot { background: rgba(192,96,128,0.38); box-shadow: 0 0 0 2px rgba(192,96,128,0.55); }
-        .hs--bride  .hs-dot { background: rgba(58,122,58,0.38);  box-shadow: 0 0 0 2px rgba(58,122,58,0.55); }
+        .hs--groom   .hs-dot { background: rgba(192,96,128,0.38);  box-shadow: 0 0 0 2px rgba(192,96,128,0.55); }
+        .hs--bride   .hs-dot { background: rgba(58,122,58,0.38);   box-shadow: 0 0 0 2px rgba(58,122,58,0.55); }
+        .hs--sangeet .hs-dot { background: rgba(249,115,22,0.38);  box-shadow: 0 0 0 2px rgba(249,115,22,0.55); }
 
         /* Active / hover state: white ring glow */
         .hs.is-lit .hs-dot,
@@ -261,6 +262,18 @@
             padding: 5px 11px;
             border-radius: 100px;
         }
+        .dc-color-sub {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            margin: -12px 0 22px;
+        }
+        .dc-holy-header {
+            text-align: center;
+            padding: 48px 24px 8px;
+        }
         .dc-hs-hint {
             font-size: 12px;
             color: var(--text-mid);
@@ -365,6 +378,76 @@
             max-width: 540px;
         }
 
+        /* JPEG blend — approximates the removebg float effect */
+        #sangeet-img-col .dc-collage {
+            mix-blend-mode: multiply;
+        }
+
+        /* ── SVG ELLIPSE OVERLAY ── */
+        .dc-hs-svg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: visible;
+            z-index: 5;
+        }
+        .dc-hs-svg ellipse {
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            stroke-opacity: 0;
+            transition: stroke-opacity 0.3s ease;
+        }
+        .dc-hs-svg ellipse.is-lit {
+            stroke-opacity: 0.88;
+            animation: ellipse-pulse 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.65));
+        }
+        @keyframes ellipse-pulse {
+            0%, 100% { stroke-opacity: 0.88; }
+            50%       { stroke-opacity: 0.50; }
+        }
+
+        /* ── UNIFIED THREE-COLUMN ROW (Holy Matrimony & Reception) ── */
+        .dc-unified-row {
+            display: flex;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 0 80px;
+        }
+        /* Image columns: each takes ~37% of the row */
+        .dc-unified-row .dc-img-col {
+            flex: 0 0 37%;
+            max-width: 37%;
+        }
+        .dc-unified-row .dc-img-col .dc-collage {
+            width: 100%;
+            height: auto;
+            max-height: none;
+        }
+        .dc-centre-col {
+            flex: 0 0 26%;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 48px 24px;
+        }
+        .dc-centre-col .dc-swatches { justify-content: center; }
+        .dc-centre-col .dc-attire-list { justify-content: center; }
+        .dc-text-half { width: 100%; }
+        .dc-centre-divider {
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(196,151,58,0.3), transparent);
+            margin: 36px 0;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 860px) {
             .dc-block,
@@ -379,6 +462,28 @@
             .dc-text-col { order: -1; padding: 36px 28px; }
             .dc-shops { padding: 52px 24px; }
             .dc-shops-grid { grid-template-columns: 1fr; }
+
+            /* Unified row: title → bride text → groom text → both images side by side */
+            .dc-unified-row {
+                flex-wrap: wrap;
+                padding-bottom: 56px;
+            }
+            .dc-centre-col {
+                order: 1;
+                flex-basis: 100%;
+                width: 100%;
+                padding: 36px 24px;
+            }
+            .dc-unified-row .dc-img-col {
+                order: 2;
+                flex: none;
+                width: 50%;
+            }
+            .dc-unified-row .dc-img-col .dc-collage {
+                width: 100%;
+                max-height: 320px;
+                object-fit: contain;
+            }
         }
         @media (max-width: 540px) {
             .dc-hero { padding: 56px 20px 32px; }
@@ -387,6 +492,7 @@
     </style>
 </head>
 <body>
+<script src="gate.js"></script>
 <nav class="navbar">
     <div class="nav-inner">
         <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
@@ -420,20 +526,80 @@
         <p class="dc-disclaimer">"These are suggestions — please don't feel limited. You're welcome to wear whatever makes you feel your best!"</p>
     </section>
 
-    <p class="dc-theme-note">The colour theme carries through all events. There's no strict separation between the church wedding and reception — if you'd like to change between events, that's entirely your own choice.</p>
+    <!-- ═══════════════════════════════════════════════════
+         MADHURAMVEPPU — VIP only
+    ════════════════════════════════════════════════════ -->
+    <div class="vip-only">
+        <div class="dc-block dc-block--groom">
+
+            <!-- IMAGE + HOTSPOTS -->
+            <div class="dc-img-col" id="sangeet-img-col">
+                <img src="assets/MadhuramveppuFusion.jpeg" alt="Madhuramveppu (Sangeet) — Fusion Kerala Attire" class="dc-collage">
+
+                <!-- Sangeet hotspots — colour: #f97316 -->
+
+                <div class="hs hs--sangeet tip-below" style="left:12%;top:6%"  data-n="1"  data-label="Kasavu Set Saree" data-sub="Classic Kerala silk with gold kasavu border, ivory-white"></div>
+                <div class="hs hs--sangeet tip-below" style="left:32%;top:7%"  data-n="2"  data-label="Mundum Neriyathum" data-sub="Traditional two-piece Kerala drape, white with kasavu"></div>
+                <div class="hs hs--sangeet tip-below" style="left:55%;top:6%"  data-n="3"  data-label="Fusion Maxi Skirt Set" data-sub="Contemporary silhouette with kasavu trim, marigold tones"></div>
+                <div class="hs hs--sangeet tip-below" style="left:76%;top:8%"  data-n="4"  data-label="Kasavu Kurta (Men)" data-sub="Ivory kurta with gold kasavu embroidery, mens festive"></div>
+
+                <div class="hs hs--sangeet" style="left:18%;top:32%"  data-n="5"  data-label="Pattupavada + Blouse" data-sub="Girls silk skirt + blouse, festive Kerala style, saffron"></div>
+                <div class="hs hs--sangeet" style="left:40%;top:34%"  data-n="6"  data-label="Saffron Anarkali" data-sub="Flowy anarkali suit, warm saffron with kasavu-style border"></div>
+                <div class="hs hs--sangeet" style="left:62%;top:33%"  data-n="7"  data-label="Hot Pink Lehenga" data-sub="Silk lehenga choli, hot pink with gold thread work"></div>
+                <div class="hs hs--sangeet" style="left:85%;top:32%"  data-n="8"  data-label="White Dhoti + Festive Kurta" data-sub="Kerala traditional dhoti with saffron or marigold kurta"></div>
+
+                <div class="hs hs--sangeet" style="left:22%;top:62%"  data-n="9"  data-label="Marigold Salwar Set" data-sub="Ethnic salwar kameez, marigold with mirror work details"></div>
+                <div class="hs hs--sangeet" style="left:50%;top:65%"  data-n="10" data-label="Deep Orange Fusion Gown" data-sub="Western-cut gown in deep orange with ethnic gold trim"></div>
+                <div class="hs hs--sangeet" style="left:75%;top:63%"  data-n="11" data-label="Red Kanjeevaram Saree" data-sub="Heavy silk saree, deep red with gold zari — festive formal"></div>
+            </div>
+
+            <!-- TEXT -->
+            <div class="dc-text-col">
+                <h2 class="dc-color-title">Madhuramveppu (Sangeet)</h2>
+                <p class="dc-color-sub">Fusion Kerala Attire</p>
+                <div class="dc-swatches">
+                    <div class="dc-swatch" style="background:#f5f0e0;" title="Kasavu White"></div>
+                    <div class="dc-swatch" style="background:#f5a623;" title="Marigold"></div>
+                    <div class="dc-swatch" style="background:#f97316;" title="Saffron"></div>
+                    <div class="dc-swatch" style="background:#e05a00;" title="Deep Orange"></div>
+                    <div class="dc-swatch" style="background:#e8006f;" title="Hot Pink"></div>
+                    <div class="dc-swatch" style="background:#c41230;" title="Red"></div>
+                </div>
+                <p class="dc-body">Celebrate the evening in the spirit of Kerala — a beautiful blend of tradition and contemporary flair. Think kasavu sets with a modern twist, vibrant silhouettes, and colours that honour heritage while lighting up the night. Mundum Neriyathum, Set Sarees, and Fusion styles are all welcome.</p>
+                <div class="dc-attire-list">
+                    <span class="dc-attire-tag">Mundum Neriyathum</span>
+                    <span class="dc-attire-tag">Set Saree</span>
+                    <span class="dc-attire-tag">Kasavu Kurta</span>
+                    <span class="dc-attire-tag">Pattupavada</span>
+                    <span class="dc-attire-tag">Fusion Gown</span>
+                    <span class="dc-attire-tag">Anarkali</span>
+                    <span class="dc-attire-tag">Salwar Set</span>
+                    <span class="dc-attire-tag">Dhoti &amp; Kurta</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dc-divider">
+            <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
+        </div>
+    </div>
+
+    <p class="dc-theme-note">The colour theme carries through all events on 20th. There's no strict separation between the church wedding and reception — if you'd like to change between events, that's entirely your own choice.</p>
+
+    <div class="dc-holy-header">
+        <h2 class="dc-color-title">Holy Matrimony &amp; Reception</h2>
+    </div>
 
     <!-- ═══════════════════════════════════════════════════
-         BRIDE'S SIDE — image anchored LEFT
+         HOLY MATRIMONY & RECEPTION — unified three-column row
     ════════════════════════════════════════════════════ -->
-    <div class="dc-block dc-block--bride">
+    <div class="dc-unified-row">
 
-        <!-- IMAGE + HOTSPOTS -->
+        <!-- FAR LEFT: Bride image + hotspots -->
         <div class="dc-img-col" id="bride-img-col">
             <img src="assets/BridesSideGreens-removebg-preview.png" alt="Bride's side — shades of green outfits" class="dc-collage">
 
-
             <!-- Bride hotspots — colour: #3a7a3a -->
-
             <div class="hs hs--bride tip-below" style="left:8%;top:5%"  data-n="1"  data-label="Charcoal + Forest Green Blazer" data-sub="Dark suit jacket over green shirt, mens western"></div>
             <div class="hs hs--bride tip-below" style="left:22%;top:7%" data-n="2"  data-label="Olive Casual Polo Shirt" data-sub="Polo or oxford casual shirt, earthy olive, mens"></div>
             <div class="hs hs--bride tip-below" style="left:38%;top:5%" data-n="3"  data-label="Hunter Green Oxford Shirt" data-sub="Smart casual button-down, deep hunter green, mens"></div>
@@ -473,48 +639,64 @@
             <div class="hs hs--bride" style="left:82%;top:93%"  data-n="32" data-label="Olive-Gold Kids Lehenga" data-sub="Girls lehenga in olive-yellow-green with gold zari"></div>
         </div>
 
-        <!-- TEXT -->
-        <div class="dc-text-col">
-            <span class="dc-side-label">Bride's Side</span>
-            <h2 class="dc-color-title">Shades of Green</h2>
-            <div class="dc-swatches">
-                <div class="dc-swatch" style="background:#2D5A27;" title="Forest Green"></div>
-                <div class="dc-swatch" style="background:#3A5E38;" title="Bottle Green"></div>
-                <div class="dc-swatch" style="background:#3D6B48;" title="Emerald"></div>
-                <div class="dc-swatch" style="background:#5E7D40;" title="Olive Green"></div>
-                <div class="dc-swatch" style="background:#7B9E6B;" title="Sage Green"></div>
-                <div class="dc-swatch" style="background:#A8C5A0;" title="Mint Green"></div>
+        <!-- CENTRE: Bride text + divider + Groom text -->
+        <div class="dc-centre-col">
+            <div class="dc-text-half">
+                <h2 class="dc-color-title">Bride's Side</h2>
+                <p class="dc-color-sub">Shades of Green</p>
+                <div class="dc-swatches">
+                    <div class="dc-swatch" style="background:#2D5A27;" title="Forest Green"></div>
+                    <div class="dc-swatch" style="background:#3A5E38;" title="Bottle Green"></div>
+                    <div class="dc-swatch" style="background:#3D6B48;" title="Emerald"></div>
+                    <div class="dc-swatch" style="background:#5E7D40;" title="Olive Green"></div>
+                    <div class="dc-swatch" style="background:#7B9E6B;" title="Sage Green"></div>
+                    <div class="dc-swatch" style="background:#A8C5A0;" title="Mint Green"></div>
+                </div>
+                <p class="dc-body">From deep forest and emerald to sage, mint, and zari — all shades of green are warmly welcome. Bridesmaids will be in gowns, so feel inspired. Whether Indian ethnic wear or western, the colour palette stays the same across all events.</p>
+                <div class="dc-attire-list">
+                    <span class="dc-attire-tag">Sarees</span>
+                    <span class="dc-attire-tag">Lehengas</span>
+                    <span class="dc-attire-tag">Kurtas</span>
+                    <span class="dc-attire-tag">Sherwanis</span>
+                    <span class="dc-attire-tag">Gowns</span>
+                    <span class="dc-attire-tag">Evening Dresses</span>
+                    <span class="dc-attire-tag">Suits</span>
+                    <span class="dc-attire-tag">Blazer Sets</span>
+                </div>
             </div>
-            <p class="dc-body">From deep forest and emerald to sage, mint, and zari — all shades of green are warmly welcome. Bridesmaids will be in gowns, so feel inspired. Whether Indian ethnic wear or western, the colour palette stays the same across all events.</p>
-            <div class="dc-attire-list">
-                <span class="dc-attire-tag">Sarees</span>
-                <span class="dc-attire-tag">Lehengas</span>
-                <span class="dc-attire-tag">Kurtas</span>
-                <span class="dc-attire-tag">Sherwanis</span>
-                <span class="dc-attire-tag">Gowns</span>
-                <span class="dc-attire-tag">Evening Dresses</span>
-                <span class="dc-attire-tag">Suits</span>
-                <span class="dc-attire-tag">Blazer Sets</span>
+
+            <div class="dc-centre-divider"></div>
+
+            <div class="dc-text-half">
+                <h2 class="dc-color-title">Groom's Side</h2>
+                <p class="dc-color-sub">Shades of Pink</p>
+                <div class="dc-swatches">
+                    <div class="dc-swatch" style="background:#F2A0B0;" title="Powder Pink"></div>
+                    <div class="dc-swatch" style="background:#E8889A;" title="Blush Pink"></div>
+                    <div class="dc-swatch" style="background:#D96E7E;" title="Rose Pink"></div>
+                    <div class="dc-swatch" style="background:#F0C2CC;" title="Pearl Pink"></div>
+                    <div class="dc-swatch" style="background:#C7768A;" title="Dusty Rose"></div>
+                    <div class="dc-swatch" style="background:#B05070;" title="Deep Magenta"></div>
+                </div>
+                <p class="dc-body">From blush and powder pink to dusty rose and deep magenta — all shades of pink are welcome. Sherwanis, kurtas, lehengas, gowns, sarees — Indian ethnic or western, the colour theme stays the same throughout all events.</p>
+                <div class="dc-attire-list">
+                    <span class="dc-attire-tag">Sherwanis</span>
+                    <span class="dc-attire-tag">Kurtas</span>
+                    <span class="dc-attire-tag">Lehengas</span>
+                    <span class="dc-attire-tag">Sarees</span>
+                    <span class="dc-attire-tag">Anarkalis</span>
+                    <span class="dc-attire-tag">Gowns</span>
+                    <span class="dc-attire-tag">Evening Dresses</span>
+                    <span class="dc-attire-tag">Blazer Sets</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="dc-divider">
-        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true">
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════
-         GROOM'S SIDE — image anchored RIGHT
-    ════════════════════════════════════════════════════ -->
-    <div class="dc-block dc-block--groom">
-
-        <!-- IMAGE + HOTSPOTS -->
+        <!-- FAR RIGHT: Groom image + hotspots -->
         <div class="dc-img-col" id="groom-img-col">
             <img src="assets/GroomSidePink-removebg-preview.png" alt="Groom's side — shades of pink outfits" class="dc-collage">
 
-
             <!-- Groom hotspots — colour: #c06080 -->
-
             <div class="hs hs--groom tip-below" style="left:10%;top:5%"   data-n="1"  data-label="Blush Pink Blazer" data-sub="Formal 2-piece suit, ivory-pink tone"></div>
             <div class="hs hs--groom tip-below" style="left:28%;top:8%"   data-n="2"  data-label="Powder Pink Sherwani" data-sub="Embroidered mens ethnic wear, soft pink"></div>
             <div class="hs hs--groom tip-below" style="left:52%;top:7%"   data-n="3"  data-label="Anarkali with Dupatta" data-sub="Flowy printed anarkali, pastel pink + teal dupatta"></div>
@@ -522,7 +704,7 @@
             <div class="hs hs--groom tip-below" style="left:88%;top:8%"   data-n="5"  data-label="Lilac-Pink Kurta" data-sub="Nehru collar kurta, soft lilac-pink"></div>
 
             <div class="hs hs--groom" style="left:7%;top:22%"   data-n="6"  data-label="Ivory-White Suit" data-sub="Western suit, off-white; pairs with pink accessories"></div>
-            <div class="hs hs--groom" style="left:88%;top:20%"  data-n="7"  data-label="Dhoti & Pink Kurta" data-sub="Kerala white dhoti + pink kurta, traditional"></div>
+            <div class="hs hs--groom" style="left:88%;top:20%"  data-n="7"  data-label="Dhoti &amp; Pink Kurta" data-sub="Kerala white dhoti + pink kurta, traditional"></div>
 
             <div class="hs hs--groom" style="left:8%;top:37%"   data-n="8"  data-label="Hot Pink Casual Shirt" data-sub="Relaxed fit bright pink shirt, mens western"></div>
             <div class="hs hs--groom" style="left:25%;top:38%"  data-n="9"  data-label="Rose Pink Gown" data-sub="Off-shoulder flutter-sleeve midi gown, rose pink"></div>
@@ -548,30 +730,6 @@
             <div class="hs hs--groom" style="left:83%;top:88%"  data-n="26" data-label="Pale Pink Evening Dress" data-sub="Womens western bodycon + deep pink saree"></div>
         </div>
 
-        <!-- TEXT -->
-        <div class="dc-text-col">
-            <span class="dc-side-label">Groom's Side</span>
-            <h2 class="dc-color-title">Shades of Pink</h2>
-            <div class="dc-swatches">
-                <div class="dc-swatch" style="background:#F2A0B0;" title="Powder Pink"></div>
-                <div class="dc-swatch" style="background:#E8889A;" title="Blush Pink"></div>
-                <div class="dc-swatch" style="background:#D96E7E;" title="Rose Pink"></div>
-                <div class="dc-swatch" style="background:#F0C2CC;" title="Pearl Pink"></div>
-                <div class="dc-swatch" style="background:#C7768A;" title="Dusty Rose"></div>
-                <div class="dc-swatch" style="background:#B05070;" title="Deep Magenta"></div>
-            </div>
-            <p class="dc-body">From blush and powder pink to dusty rose and deep magenta — all shades of pink are welcome. Sherwanis, kurtas, lehengas, gowns, sarees — Indian ethnic or western, the colour theme stays the same throughout all events.</p>
-            <div class="dc-attire-list">
-                <span class="dc-attire-tag">Sherwanis</span>
-                <span class="dc-attire-tag">Kurtas</span>
-                <span class="dc-attire-tag">Lehengas</span>
-                <span class="dc-attire-tag">Sarees</span>
-                <span class="dc-attire-tag">Anarkalis</span>
-                <span class="dc-attire-tag">Gowns</span>
-                <span class="dc-attire-tag">Evening Dresses</span>
-                <span class="dc-attire-tag">Blazer Sets</span>
-            </div>
-        </div>
     </div>
 
     <div class="dc-divider">

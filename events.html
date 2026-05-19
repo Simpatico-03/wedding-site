@@ -191,9 +191,146 @@
                 padding: 0;
             }
         }
+
+        /* ── Madhuramveppu & Sangeet (VIP) ── */
+        .sangeet-section {
+            background-color: var(--forest);
+            padding: 72px 60px 56px;
+            text-align: center;
+            position: relative;
+        }
+        .sangeet-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .sangeet-ev-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(34px, 5vw, 52px);
+            margin: 0 0 8px;
+            letter-spacing: 0.02em;
+            font-weight: 400;
+            background: linear-gradient(110deg, #8C6418 0%, #C4973A 22%, #F0D888 48%, #C4973A 72%, #8C6418 88%, #D4A848 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sangeet-ev-location {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.65);
+            margin: 0 0 16px;
+        }
+        .sangeet-subtitle {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin: 0 0 10px;
+        }
+        .sangeet-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(42px, 6vw, 72px);
+            font-weight: 400;
+            margin: 0;
+            line-height: 1.05;
+            background: linear-gradient(110deg, #8C6418 0%, #C4973A 22%, #F0D888 48%, #C4973A 72%, #8C6418 88%, #D4A848 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sangeet-meta {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            margin: 28px 0 30px;
+        }
+        .sangeet-meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+        }
+        .sangeet-meta-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 3px;
+            filter: brightness(0) invert(1);
+            opacity: 0.75;
+        }
+        .sangeet-meta-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.58);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .sangeet-meta-value {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 400;
+            font-family: 'Jost', sans-serif;
+            line-height: 1.5;
+        }
+        .sangeet-body {
+            font-size: 15px;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.88);
+            font-weight: 300;
+            max-width: 580px;
+            margin: 0 auto 30px;
+        }
+        .sangeet-btn-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .sangeet-btn {
+            display: inline-block;
+            border: 1.5px solid rgba(255,255,255,0.65);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-family: 'Jost', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            transition: background 0.25s;
+        }
+        .sangeet-btn:hover { background: rgba(255,255,255,0.18); }
+        .events-page-location {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background-color: var(--forest);
+            padding: 20px 0 14px;
+            margin: 0;
+        }
+        @media (max-width: 640px) {
+            .sangeet-section { padding: 56px 24px 44px; }
+            .sangeet-meta { gap: 28px; }
+        }
     </style>
 </head>
 <body>
+<script src="gate.js"></script>
 <nav class="navbar">
     <div class="nav-inner">
         <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R & K" class="nav-logo"></a>
@@ -216,13 +353,46 @@
 </nav>
 
 <main>
+    <p class="events-page-location">Kerala, India</p>
     <div class="botanical-layer botanical-layer-side botanical-layer-side-left" aria-hidden="true"></div>
     <div class="botanical-layer botanical-layer-side botanical-layer-side-right" aria-hidden="true"></div>
+
+    <!-- Madhuramveppu & Sangeet — VIP guests only -->
+    <div class="vip-only">
+        <section class="sangeet-section">
+            <div class="sangeet-inner">
+                <p class="sangeet-ev-date">18 August 2026</p>
+                <p class="sangeet-subtitle">Exclusive Event</p>
+                <h2 class="sangeet-title">Madhuramveppu (Sangeet)</h2>
+                <div class="sangeet-meta">
+                    <div class="sangeet-meta-item">
+                        <img src="assets/LocationIcon.png" alt="" class="sangeet-meta-icon" aria-hidden="true">
+                        <div>
+                            <span class="sangeet-meta-label">Venue</span>
+                            <span class="sangeet-meta-value">Stay Samara</span>
+                        </div>
+                    </div>
+                    <div class="sangeet-meta-item">
+                        <img src="assets/TimeIcon.png" alt="" class="sangeet-meta-icon" aria-hidden="true">
+                        <div>
+                            <span class="sangeet-meta-label">Time</span>
+                            <span class="sangeet-meta-value">4:00 PM – 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="sangeet-body">An intimate evening of music, laughter, and love — the night before the big day. Madhuramveppu is a cherished Kerala ritual bringing families together over the bittersweet promise of life ahead. Expect singing, dancing, warmth, and the best company in the world.</p>
+                <div class="sangeet-btn-row">
+                    <a class="sangeet-btn" href="https://www.google.com/maps/search/?api=1&query=Stay+Samara+Villoonni+Kerala+686008" target="_blank" rel="noopener">Get Directions</a>
+                    <a class="sangeet-btn" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Madhuramveppu+%26+Sangeet+%E2%80%94+Richa+%26+Karun&dates=20260818T103000Z%2F20260818T143000Z&details=Stay+Samara,+Villoonni,+Kerala+686008&location=Stay+Samara+Villoonni+Kerala+686008" target="_blank" rel="noopener">Add to Calendar</a>
+                </div>
+                <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true" style="margin: 28px auto 0; display: block; opacity: 0.45;">
+            </div>
+        </section>
+    </div>
 
     <section class="events-section">
         <div class="ev-header">
             <p class="ev-date">20 August 2026</p>
-            <p class="ev-location">Kerala, India</p>
         </div>
 
         <div class="ev-columns">
