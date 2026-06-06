@@ -411,41 +411,60 @@
 
         /* ── UNIFIED THREE-COLUMN ROW (Holy Matrimony & Reception) ── */
         .dc-unified-row {
-            display: flex;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 37% 26% 37%;
+            grid-template-rows: auto auto auto;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 0 80px;
         }
-        /* Image columns: each takes ~37% of the row */
-        .dc-unified-row .dc-img-col {
-            flex: 0 0 37%;
-            max-width: 37%;
+        #bride-img-col {
+            grid-column: 1;
+            grid-row: 1 / span 3;
+            align-self: center;
+        }
+        #groom-img-col {
+            grid-column: 3;
+            grid-row: 1 / span 3;
+            align-self: center;
         }
         .dc-unified-row .dc-img-col .dc-collage {
             width: 100%;
             height: auto;
             max-height: none;
         }
-        .dc-centre-col {
-            flex: 0 0 26%;
-            min-width: 0;
+        .dc-bride-text {
+            grid-column: 2;
+            grid-row: 1;
+            padding: 48px 24px 0;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            padding: 48px 24px;
         }
-        .dc-centre-col .dc-swatches { justify-content: center; }
-        .dc-centre-col .dc-attire-list { justify-content: center; }
+        .dc-groom-text {
+            grid-column: 2;
+            grid-row: 3;
+            padding: 0 24px 48px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .dc-bride-text .dc-swatches,
+        .dc-groom-text .dc-swatches { justify-content: center; }
+        .dc-bride-text .dc-attire-list,
+        .dc-groom-text .dc-attire-list { justify-content: center; }
         .dc-text-half { width: 100%; }
         .dc-centre-divider {
+            grid-column: 2;
+            grid-row: 2;
             width: 60%;
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(196,151,58,0.3), transparent);
-            margin: 36px 0;
-            flex-shrink: 0;
+            margin: 36px auto;
             align-self: center;
+            justify-self: center;
         }
 
         /* ── RESPONSIVE ── */
@@ -463,26 +482,44 @@
             .dc-shops { padding: 52px 24px; }
             .dc-shops-grid { grid-template-columns: 1fr; }
 
-            /* Unified row: title → bride text → groom text → both images side by side */
+            /* Unified row mobile: bride text → bride img → groom text → groom img */
             .dc-unified-row {
-                flex-wrap: wrap;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
                 padding-bottom: 56px;
             }
-            .dc-centre-col {
-                order: 1;
-                flex-basis: 100%;
-                width: 100%;
+            .dc-bride-text {
+                grid-column: 1;
+                grid-row: 1;
+                text-align: left;
+                align-items: flex-start;
                 padding: 36px 24px;
             }
-            .dc-unified-row .dc-img-col {
-                order: 2;
-                flex: none;
-                width: 50%;
+            #bride-img-col {
+                grid-column: 1;
+                grid-row: 2;
+                width: 100%;
             }
+            .dc-centre-divider { display: none; }
+            .dc-groom-text {
+                grid-column: 1;
+                grid-row: 3;
+                text-align: left;
+                align-items: flex-start;
+                padding: 36px 24px;
+            }
+            #groom-img-col {
+                grid-column: 1;
+                grid-row: 4;
+                width: 100%;
+            }
+            .dc-bride-text .dc-swatches,
+            .dc-groom-text .dc-swatches { justify-content: flex-start; }
+            .dc-bride-text .dc-attire-list,
+            .dc-groom-text .dc-attire-list { justify-content: flex-start; }
             .dc-unified-row .dc-img-col .dc-collage {
                 width: 100%;
-                max-height: 320px;
-                object-fit: contain;
+                max-height: none;
             }
         }
         @media (max-width: 540px) {
@@ -640,10 +677,9 @@
             <div class="hs hs--bride" style="left:82%;top:93%"  data-n="32" data-label="Olive-Gold Kids Lehenga" data-sub="Girls lehenga in olive-yellow-green with gold zari"></div>
         </div>
 
-        <!-- CENTRE: Bride text + divider + Groom text -->
-        <div class="dc-centre-col">
-            <div class="dc-text-half">
-                <h2 class="dc-color-title">Bride's Side</h2>
+        <!-- Bride text -->
+        <div class="dc-text-half dc-bride-text">
+            <h2 class="dc-color-title">Bride's Side</h2>
                 <p class="dc-color-sub">Shades of Green</p>
                 <div class="dc-swatches">
                     <div class="dc-swatch" style="background:#2D5A27;" title="Forest Green"></div>
@@ -668,8 +704,9 @@
 
             <div class="dc-centre-divider"></div>
 
-            <div class="dc-text-half">
-                <h2 class="dc-color-title">Groom's Side</h2>
+        <!-- Groom text -->
+        <div class="dc-text-half dc-groom-text">
+            <h2 class="dc-color-title">Groom's Side</h2>
                 <p class="dc-color-sub">Shades of Pink</p>
                 <div class="dc-swatches">
                     <div class="dc-swatch" style="background:#F2A0B0;" title="Powder Pink"></div>
@@ -690,7 +727,6 @@
                     <span class="dc-attire-tag">Evening Dresses</span>
                     <span class="dc-attire-tag">Blazer Sets</span>
                 </div>
-            </div>
         </div>
 
         <!-- FAR RIGHT: Groom image + hotspots -->
