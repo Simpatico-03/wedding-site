@@ -1,6 +1,6 @@
 (function () {
     var TIER_KEY = 'wedding_tier';
-    var CODES = { nearanddear: 'vip', RichaKarun26: 'standard' };
+    var CODES = { nearanddear: 'vip', KarunRicha: 'standard' };
 
     /* Inject VIP visibility CSS immediately */
     var vipStyle = document.createElement('style');

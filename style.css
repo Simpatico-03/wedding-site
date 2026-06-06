@@ -30,6 +30,7 @@ body {
     color: var(--text-dark);
     font-size: 1rem;
     line-height: 1.65;
+    overflow-x: hidden;
 
     /* base gradient */
     background: radial-gradient(circle at top, var(--ivory), var(--ivory-warm));
@@ -45,6 +46,7 @@ body {
 html {
     scroll-behavior: smooth;
     font-size: 18px;
+    overflow-x: hidden;
 }
 
 h1,
@@ -2822,26 +2824,21 @@ body::after {
     background: var(--ivory);
 }
 
-.dress-code-page > section:nth-of-type(even),
+/* Full-bleed alternating section backgrounds on travel page.
+   Uses fixed -20px margins matching the parent's 20px horizontal padding
+   instead of calc(50% - 50vw), which overflows on desktop due to scrollbar width. */
 .travel-page > .travel-section:nth-of-type(even) {
     background: var(--ivory-warm);
     max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    padding-left: calc(50vw - 50% + 20px);
-    padding-right: calc(50vw - 50% + 20px);
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 40px;
+    padding-right: 40px;
     box-sizing: border-box;
 }
 
-.dress-code-page > section:nth-of-type(odd),
 .travel-page > .travel-section:nth-of-type(odd) {
     background: var(--ivory);
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    padding-left: calc(50vw - 50% + 20px);
-    padding-right: calc(50vw - 50% + 20px);
-    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
@@ -3858,6 +3855,9 @@ li,
     }
 
     /* Events section */
+    .events-hero {
+        padding: 36px 20px 40px !important;
+    }
     .events-section {
         padding: 36px 18px !important;
     }
@@ -3870,12 +3870,22 @@ li,
     }
 
     /* Travel page */
+    .travel-page {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
     .travel-hero {
         margin-bottom: 0 !important;
     }
     .travel-section {
         padding: 32px 16px 8px !important;
         margin-bottom: 0 !important;
+    }
+    /* Even travel sections span full viewport width (margin: -20px);
+       bump side padding to 36px so inner content aligns with odd sections (20px page + 16px = 36px) */
+    .travel-page > .travel-section:nth-of-type(even) {
+        padding-left: 36px !important;
+        padding-right: 36px !important;
     }
     .travel-section h2,
     .section-title {

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Through Your Lens | Richa &amp; Karun</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .lens-page {
+            background: var(--ivory);
+            font-family: 'Jost', sans-serif;
+        }
+
+        /* ── HERO ── */
+        .lens-hero {
+            text-align: center;
+            padding: 80px 24px 52px;
+            position: relative;
+        }
+
+        .lens-eyebrow {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 16px;
+        }
+
+        .lens-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(46px, 7vw, 78px);
+            color: var(--burgundy);
+            margin: 0 0 8px;
+            line-height: 1.05;
+            font-weight: 400;
+        }
+
+        .lens-intro {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--text-mid);
+            max-width: 520px;
+            margin: 20px auto 0;
+            line-height: 1.9;
+        }
+
+        /* ── BINGO SECTION ── */
+        .lens-bingo {
+            padding: 0 32px 80px;
+            text-align: center;
+        }
+
+        .lens-bingo-sub {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin: 0 0 36px;
+        }
+
+        /* Card wrapper — gives it the tactile framed feel */
+        .bingo-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--ivory);
+            border: 1px solid rgba(196,151,58,0.25);
+            border-radius: 6px;
+            padding: 28px 28px 24px;
+            position: relative;
+            box-shadow: 0 4px 48px rgba(74,15,28,0.04);
+        }
+
+        /* Faint botanical corner accent */
+        .bingo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            height: 180px;
+            background: url('assets/kerala-botanical.svg') top right / contain no-repeat;
+            opacity: 0.045;
+            pointer-events: none;
+            border-radius: 6px;
+        }
+        .bingo-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 180px;
+            height: 180px;
+            background: url('assets/kerala-botanical.svg') bottom left / contain no-repeat;
+            opacity: 0.045;
+            pointer-events: none;
+            transform: scaleX(-1);
+            border-radius: 6px;
+        }
+
+        /* Axis layout wrappers */
+        .bingo-axis-layout { display: flex; flex-direction: column; gap: 6px; }
+        .bingo-top-row { display: flex; align-items: flex-end; gap: 6px; }
+        .bingo-body { display: flex; gap: 16px; }
+        .bingo-y-axis { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+
+        /* Column headers: RICHA */
+        .bingo-header {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Shared axis letter styles */
+        .bingo-letter,
+        .bingo-row-letter,
+        .bingo-corner {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(20px, 2.8vw, 28px);
+            color: var(--burgundy);
+            font-weight: 400;
+            text-align: center;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bingo-letter { padding: 4px 0 6px; }
+        .bingo-row-letter { flex: 1; }
+
+        /* Bingo grid */
+        .bingo-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .bingo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            min-width: 280px;
+        }
+
+        .bingo-cell {
+            aspect-ratio: 1;
+            background: rgba(247,242,234,0.7);
+            border: 1px solid rgba(196,151,58,0.22);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8px 6px;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(10px, 1.4vw, 13.5px);
+            color: var(--text-mid);
+            line-height: 1.32;
+            transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.15s ease;
+            user-select: none;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bingo-cell:hover:not(.bingo-cell--free) {
+            border-color: rgba(196,151,58,0.5);
+            background: var(--ivory-warm);
+        }
+
+        .bingo-cell:active:not(.bingo-cell--free) {
+            transform: scale(0.97);
+        }
+
+        /* Marked state */
+        .bingo-cell.marked:not(.bingo-cell--free) {
+            background: rgba(196,151,58,0.14);
+            border-color: rgba(196,151,58,0.65);
+            color: var(--burgundy-deep);
+        }
+
+        .bingo-cell.marked:not(.bingo-cell--free)::after {
+            content: '✦';
+            position: absolute;
+            top: 4px;
+            right: 5px;
+            font-size: 7px;
+            color: var(--gold);
+            font-style: normal;
+            font-family: 'Jost', sans-serif;
+            line-height: 1;
+        }
+
+        /* Free centre square */
+        .bingo-cell--free {
+            background: var(--ivory-warm);
+            border-color: rgba(196,151,58,0.42);
+            cursor: default;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .bingo-free-heart {
+            display: block;
+            font-size: clamp(22px, 3.2vw, 30px);
+            color: var(--burgundy);
+            line-height: 1;
+            font-style: normal;
+        }
+
+        .bingo-free-label {
+            display: block;
+            font-size: clamp(7px, 1vw, 9px);
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-family: 'Jost', sans-serif;
+            line-height: 1;
+        }
+
+        .lens-bingo-hint {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 300;
+            margin: 18px 0 0;
+        }
+
+        /* ── CTA SECTION ── */
+        .lens-cta {
+            text-align: center;
+            padding: 72px 24px 80px;
+            background: var(--ivory-warm);
+            position: relative;
+        }
+
+        .lens-cta-eyebrow {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 14px;
+        }
+
+        .lens-cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(34px, 5vw, 56px);
+            color: var(--burgundy);
+            font-weight: 400;
+            margin: 0 0 14px;
+            line-height: 1.05;
+        }
+
+        .lens-cta-body {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--text-mid);
+            max-width: 420px;
+            margin: 0 auto 36px;
+            line-height: 1.85;
+        }
+
+        .lens-cta-btn {
+            display: inline-block;
+            padding: 15px 44px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--burgundy-deep);
+            text-decoration: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .lens-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-lift-shadow);
+        }
+
+        .lens-divider {
+            width: 1px;
+            height: 48px;
+            background: rgba(196,151,58,0.3);
+            margin: 40px auto;
+        }
+
+        /* QR code block */
+        .lens-qr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lens-qr-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid rgba(196,151,58,0.28);
+            border-radius: 4px;
+            display: block;
+        }
+
+        .lens-qr-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 300;
+            margin: 0;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .lens-bingo { padding: 0 16px 56px; }
+            .bingo-card { padding: 20px 16px 18px; }
+            .bingo-card::before,
+            .bingo-card::after { width: 110px; height: 110px; }
+            .bingo-cell { font-size: 9px; padding: 5px 4px; }
+            .bingo-letter, .bingo-row-letter, .bingo-corner { font-size: 18px; }
+        }
+
+        @media (max-width: 420px) {
+            .lens-hero { padding: 48px 20px 36px; }
+            .bingo-wrap { overflow-x: auto; }
+            .bingo-grid { min-width: 280px; }
+            .bingo-card { padding: 16px 12px 14px; }
+        }
+
+        @media (max-width: 600px) {
+            .lens-cta { padding: 52px 20px 56px; }
+        }
+    </style>
+</head>
+<body>
+<script src="gate.js"></script>
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-monogram"><img src="assets/WeddingLogo.png" alt="R &amp; K" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="our-story.html">Our Story</a>
+            <a href="events.html">Events</a>
+            <a href="dress-code.html">Dress Code</a>
+            <a href="travel.html">Travel</a>
+            <a href="rsvp.html">RSVP</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+            <a href="lens.html">Through Your Lens</a>
+        </div>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
+    </div>
+</nav>
+
+<main class="lens-page">
+    <img src="assets/FloralGoldCorner3.png" alt="" class="corner-floral corner-floral-tl" aria-hidden="true">
+    <img src="assets/FloralGoldCorner1.png" alt="" class="corner-floral corner-floral-br" aria-hidden="true">
+
+    <!-- HERO -->
+    <section class="lens-hero">
+        <p class="lens-eyebrow">Richa &amp; Karun · 20 August 2026</p>
+        <h1 class="lens-title">Through Your Lens</h1>
+        <img src="assets/GoldDivider.png" alt="" class="gold-divider-img" aria-hidden="true" style="display:block;margin:0 auto 20px;">
+        <p class="lens-intro">The quieter moments are the ones worth keeping — a grandmother's proud smile, confetti still caught in someone's hair, two people utterly absorbed in each other. This card is your invitation to slow down and look. Find these moments, photograph them, and add them to our shared album below.</p>
+    </section>
+
+    <!-- BINGO CARD -->
+    <section class="lens-bingo" aria-label="Wedding bingo card">
+        <p class="lens-bingo-sub">25 Moments to Find</p>
+
+        <div class="bingo-card">
+            <div class="bingo-axis-layout">
+
+                <!-- Top row: empty corner + RICHA column headers -->
+                <div class="bingo-top-row" aria-hidden="true">
+                    <div class="bingo-corner"></div>
+                    <div class="bingo-header">
+                        <div class="bingo-letter">R</div>
+                        <div class="bingo-letter">I</div>
+                        <div class="bingo-letter">C</div>
+                        <div class="bingo-letter">H</div>
+                        <div class="bingo-letter">A</div>
+                    </div>
+                </div>
+
+                <!-- Body: KARUN row labels + 5×5 grid -->
+                <div class="bingo-body">
+                    <div class="bingo-y-axis" aria-hidden="true">
+                        <div class="bingo-row-letter">K</div>
+                        <div class="bingo-row-letter">A</div>
+                        <div class="bingo-row-letter">R</div>
+                        <div class="bingo-row-letter">U</div>
+                        <div class="bingo-row-letter">N</div>
+                    </div>
+                    <div class="bingo-wrap">
+                        <div class="bingo-grid" role="grid" aria-label="Bingo card">
+
+                            <!-- Row 1 -->
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="The groom's face when he first sees her">The groom's face when he first sees her</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Someone crying happy tears">Someone crying happy tears</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="The flower girl in full swing">The flower girl in full swing</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Confetti caught mid-air">Confetti caught mid-air</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A quiet prayer">A quiet prayer</div>
+
+                            <!-- Row 2 -->
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A table with too much food">A table with too much food</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Two grandparents side by side">Two grandparents side by side</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A stolen glance between the couple">A stolen glance between the couple</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A toast with glistening eyes">A toast with glistening eyes</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="The bride laughing with her eyes closed">The bride laughing with her eyes closed</div>
+
+                            <!-- Row 3 (centre) -->
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Kids causing beautiful chaos">Kids causing beautiful chaos</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A parent watching from a distance">A parent watching from a distance</div>
+                            <div class="bingo-cell bingo-cell--free" role="gridcell" aria-label="Free space">
+                                <span class="bingo-free-heart" aria-hidden="true">♥</span>
+                                <span class="bingo-free-label">Free</span>
+                            </div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="The veil catching the light">The veil catching the light</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Someone sneaking a second plate">Someone sneaking a second plate</div>
+
+                            <!-- Row 4 -->
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A hug that lasted a little too long">A hug that lasted a little too long</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="The rings, close up">The rings, close up</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A bridesmaid fixing something last minute">A bridesmaid fixing something last minute</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Richa &amp; Karun's hands joined">Richa &amp; Karun's hands joined</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="An aunty owning the dance floor">An aunty owning the dance floor</div>
+
+                            <!-- Row 5 -->
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Flowers in someone's hair">Flowers in someone's hair</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Golden hour on a saree">Golden hour on a saree</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A child asleep somewhere unexpected">A child asleep somewhere unexpected</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="A meaningful look across the room">A meaningful look across the room</div>
+                            <div class="bingo-cell" role="gridcell" tabindex="0" aria-label="Just the two of them">Just the two of them</div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <p class="lens-bingo-hint">Tap a square when you spot it — your progress is saved on this device</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="lens-cta">
+        <p class="lens-cta-eyebrow">Share the moment</p>
+        <h2 class="lens-cta-title">Add it to our album</h2>
+        <p class="lens-cta-body">Every photo you take becomes part of the story we'll carry forever. Upload yours to our shared Google Photos album.</p>
+        <a href="https://photos.app.goo.gl/Lp39MYNcCZTeS5wH7" target="_blank" rel="noopener" class="lens-cta-btn">Add Your Photos →</a>
+
+        <div class="lens-divider" aria-hidden="true"></div>
+
+        <div class="lens-qr">
+            <img src="assets/GooglePhotosQR.jpeg" alt="QR code for Google Photos album" class="lens-qr-img">
+            <p class="lens-qr-label">Scan to start sharing</p>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-palms" aria-hidden="true"></div>
+    <p class="footer-names">Richa <span>&amp;</span> Karun</p>
+    <p class="footer-date">20 August 2026</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="our-story.html">Our Story</a>
+        <a href="events.html">Events</a>
+        <a href="dress-code.html">Dress Code</a>
+        <a href="travel.html">Travel</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+        <a href="lens.html">Through Your Lens</a>
+    </nav>
+</footer>
+
+<script>
+(function () {
+    var STORAGE_KEY = 'rk_bingo_marked';
+    var cells = Array.from(document.querySelectorAll('.bingo-cell:not(.bingo-cell--free)'));
+
+    /* Restore saved state */
+    var saved = [];
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) {}
+    cells.forEach(function (cell, i) {
+        if (saved.indexOf(i) !== -1) cell.classList.add('marked');
+    });
+
+    function save() {
+        var marked = cells
+            .map(function (c, i) { return c.classList.contains('marked') ? i : null; })
+            .filter(function (v) { return v !== null; });
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(marked)); } catch (e) {}
+    }
+
+    /* Toggle on click / keyboard */
+    cells.forEach(function (cell) {
+        cell.addEventListener('click', function () {
+            cell.classList.toggle('marked');
+            save();
+        });
+        cell.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                cell.classList.toggle('marked');
+                save();
+            }
+        });
+    });
+})();
+</script>
+</body>
+</html>
