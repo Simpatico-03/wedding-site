@@ -412,7 +412,8 @@
         /* ── UNIFIED THREE-COLUMN ROW (Holy Matrimony & Reception) ── */
         .dc-unified-row {
             display: grid;
-            grid-template-columns: 37% 26% 37%;
+            grid-template-columns: 34fr 32fr 34fr;
+            column-gap: 24px;
             grid-template-rows: auto auto auto;
             max-width: 1400px;
             margin: 0 auto;
@@ -422,34 +423,43 @@
             grid-column: 1;
             grid-row: 1 / span 3;
             align-self: center;
+            max-width: 380px;
+            justify-self: start;
         }
         #groom-img-col {
             grid-column: 3;
             grid-row: 1 / span 3;
             align-self: center;
+            overflow: hidden;
+            max-width: 380px;
+            justify-self: end;
         }
         .dc-unified-row .dc-img-col .dc-collage {
-            width: 100%;
+            width: auto;
             height: auto;
             max-height: none;
         }
         .dc-bride-text {
             grid-column: 2;
             grid-row: 1;
-            padding: 48px 24px 0;
+            padding: 48px 28px 0;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            min-width: 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
         .dc-groom-text {
             grid-column: 2;
             grid-row: 3;
-            padding: 0 24px 48px;
+            padding: 0 28px 48px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            min-width: 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .dc-bride-text .dc-color-title,
+        .dc-groom-text .dc-color-title {
+            font-size: clamp(26px, 2.4vw, 38px);
         }
         .dc-bride-text .dc-swatches,
         .dc-groom-text .dc-swatches { justify-content: center; }
@@ -492,7 +502,6 @@
                 grid-column: 1;
                 grid-row: 1;
                 text-align: left;
-                align-items: flex-start;
                 padding: 36px 24px;
             }
             #bride-img-col {
@@ -505,7 +514,6 @@
                 grid-column: 1;
                 grid-row: 3;
                 text-align: left;
-                align-items: flex-start;
                 padding: 36px 24px;
             }
             #groom-img-col {
