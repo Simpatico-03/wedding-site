@@ -186,6 +186,7 @@
     </style>
 </head>
 <body>
+<audio id="bg-music" src="assets/background-music.mp3" loop preload="auto"></audio>
 <script src="gate.js"></script>
 <nav class="navbar">
     <div class="nav-inner">
@@ -201,6 +202,7 @@
             <a href="faq.html">FAQ</a>
             <a href="lens.html">Through Your Lens</a>
         </div>
+        <button id="music-toggle" class="vinyl-record" aria-label="Play music" type="button"><i class="ti ti-music" aria-hidden="true"></i></button>
         <button class="hamburger" aria-label="Menu" aria-expanded="false">
             <span class="hamburger-bar"></span>
             <span class="hamburger-bar"></span>
@@ -302,5 +304,59 @@
 <img src="assets/FloralGoldCorner1.png" alt="" class="corner-floral corner-floral-tl" aria-hidden="true">
 <img src="assets/FloralGoldCorner4.png" alt="" class="corner-floral corner-floral-br" aria-hidden="true">
 <script src="scripts.js"></script>
+<script>
+const audio = document.getElementById('bg-music');
+const btn = document.getElementById('music-toggle');
+const musicIcon = btn.querySelector('i');
+
+function setIcon(playing) {
+  musicIcon.className = playing ? 'ti ti-music-off' : 'ti ti-music';
+  btn.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
+  btn.classList.toggle('spinning', playing);
+}
+
+function tryPlay() {
+  audio.play().then(() => {
+    sessionStorage.setItem('musicPlaying', 'true');
+    setIcon(true);
+  }).catch(() => {});
+}
+
+const savedTime = sessionStorage.getItem('musicTime');
+const wasPlaying = sessionStorage.getItem('musicPlaying') === 'true';
+
+if (savedTime) audio.currentTime = parseFloat(savedTime);
+
+if (wasPlaying) {
+  tryPlay();
+  const onInteraction = () => {
+    tryPlay();
+    ['click','scroll','touchstart'].forEach(e => document.removeEventListener(e, onInteraction));
+  };
+  ['click','scroll','touchstart'].forEach(e => document.addEventListener(e, onInteraction, { once: true }));
+} else if (!sessionStorage.getItem('musicPlaying')) {
+  const onFirst = () => {
+    tryPlay();
+    ['click','scroll','touchstart'].forEach(e => document.removeEventListener(e, onFirst));
+  };
+  ['click','scroll','touchstart'].forEach(e => document.addEventListener(e, onFirst, { once: true }));
+}
+
+btn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (audio.paused) {
+    tryPlay();
+  } else {
+    audio.pause();
+    sessionStorage.setItem('musicPlaying', 'false');
+    setIcon(false);
+  }
+});
+
+window.addEventListener('beforeunload', () => {
+  sessionStorage.setItem('musicTime', audio.currentTime);
+  sessionStorage.setItem('musicPlaying', (!audio.paused).toString());
+});
+</script>
 </body>
 </html>
