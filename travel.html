@@ -431,30 +431,47 @@ function setIcon(playing) {
 }
 
 function tryPlay() {
-  audio.play().then(() => {
+  audio.muted = false;
+  return audio.play().then(() => {
     sessionStorage.setItem('musicPlaying', 'true');
     setIcon(true);
   }).catch(() => {});
 }
 
+function tryMutedPlay() {
+  const prevMuted = audio.muted;
+  audio.muted = true;
+  return audio.play().then(() => {
+    audio.pause();
+    audio.muted = prevMuted;
+    sessionStorage.setItem('musicAutoplayAllowed', 'true');
+  }).catch(() => {
+    audio.muted = prevMuted;
+  });
+}
+
 const savedTime = sessionStorage.getItem('musicTime');
 const wasPlaying = sessionStorage.getItem('musicPlaying') === 'true';
-
 if (savedTime) audio.currentTime = parseFloat(savedTime);
+
+// attempt muted autoplay to gain permission on mobile
+tryMutedPlay();
+
+const interactionEvents = ['click','pointerdown','touchend','touchstart'];
 
 if (wasPlaying) {
   tryPlay();
   const onInteraction = () => {
     tryPlay();
-    ['click','scroll','touchstart'].forEach(e => document.removeEventListener(e, onInteraction));
+    interactionEvents.forEach(e => document.removeEventListener(e, onInteraction));
   };
-  ['click','scroll','touchstart'].forEach(e => document.addEventListener(e, onInteraction, { once: true }));
+  interactionEvents.forEach(e => document.addEventListener(e, onInteraction, { once: true }));
 } else if (!sessionStorage.getItem('musicPlaying')) {
   const onFirst = () => {
     tryPlay();
-    ['click','scroll','touchstart'].forEach(e => document.removeEventListener(e, onFirst));
+    interactionEvents.forEach(e => document.removeEventListener(e, onFirst));
   };
-  ['click','scroll','touchstart'].forEach(e => document.addEventListener(e, onFirst, { once: true }));
+  interactionEvents.forEach(e => document.addEventListener(e, onFirst, { once: true }));
 }
 
 btn.addEventListener('click', (e) => {

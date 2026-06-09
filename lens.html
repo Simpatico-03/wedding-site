@@ -501,39 +501,75 @@
 
 <script src="scripts.js"></script>
 <script>
-(function () {
-    var STORAGE_KEY = 'rk_bingo_marked';
-    var cells = Array.from(document.querySelectorAll('.bingo-cell:not(.bingo-cell--free)'));
+const audio = document.getElementById('bg-music');
+const btn = document.getElementById('music-toggle');
+const musicIcon = btn.querySelector('i');
 
-    /* Restore saved state */
-    var saved = [];
-    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) {}
-    cells.forEach(function (cell, i) {
-        if (saved.indexOf(i) !== -1) cell.classList.add('marked');
-    });
+function setIcon(playing) {
+  musicIcon.className = playing ? 'ti ti-music-off' : 'ti ti-music';
+  btn.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
+  btn.classList.toggle('spinning', playing);
+}
 
-    function save() {
-        var marked = cells
-            .map(function (c, i) { return c.classList.contains('marked') ? i : null; })
-            .filter(function (v) { return v !== null; });
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(marked)); } catch (e) {}
-    }
+function tryPlay() {
+  audio.muted = false;
+  return audio.play().then(() => {
+    sessionStorage.setItem('musicPlaying', 'true');
+    setIcon(true);
+  }).catch(() => {});
+}
 
-    /* Toggle on click / keyboard */
-    cells.forEach(function (cell) {
-        cell.addEventListener('click', function () {
-            cell.classList.toggle('marked');
-            save();
-        });
-        cell.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                cell.classList.toggle('marked');
-                save();
-            }
-        });
-    });
-})();
+function tryMutedPlay() {
+  const prevMuted = audio.muted;
+  audio.muted = true;
+  return audio.play().then(() => {
+    audio.pause();
+    audio.muted = prevMuted;
+    sessionStorage.setItem('musicAutoplayAllowed', 'true');
+  }).catch(() => {
+    audio.muted = prevMuted;
+  });
+}
+
+const savedTime = sessionStorage.getItem('musicTime');
+const wasPlaying = sessionStorage.getItem('musicPlaying') === 'true';
+if (savedTime) audio.currentTime = parseFloat(savedTime);
+
+// attempt muted autoplay to gain permission on mobile
+tryMutedPlay();
+
+const interactionEvents = ['click','pointerdown','touchend','touchstart'];
+
+if (wasPlaying) {
+  tryPlay();
+  const onInteraction = () => {
+    tryPlay();
+    interactionEvents.forEach(e => document.removeEventListener(e, onInteraction));
+  };
+  interactionEvents.forEach(e => document.addEventListener(e, onInteraction, { once: true }));
+} else if (!sessionStorage.getItem('musicPlaying')) {
+  const onFirst = () => {
+    tryPlay();
+    interactionEvents.forEach(e => document.removeEventListener(e, onFirst));
+  };
+  interactionEvents.forEach(e => document.addEventListener(e, onFirst, { once: true }));
+}
+
+btn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (audio.paused) {
+    tryPlay();
+  } else {
+    audio.pause();
+    sessionStorage.setItem('musicPlaying', 'false');
+    setIcon(false);
+  }
+});
+
+window.addEventListener('beforeunload', () => {
+  sessionStorage.setItem('musicTime', audio.currentTime);
+  sessionStorage.setItem('musicPlaying', (!audio.paused).toString());
+});
 </script>
 <script>
 const audio = document.getElementById('bg-music');
@@ -562,15 +598,15 @@ if (wasPlaying) {
   tryPlay();
   const onInteraction = () => {
     tryPlay();
-    ['click','scroll','touchstart'].forEach(e => document.removeEventListener(e, onInteraction));
+    ['click','pointerdown','touchend','touchstart'].forEach(e => document.removeEventListener(e, onInteraction));
   };
-  ['click','scroll','touchstart'].forEach(e => document.addEventListener(e, onInteraction, { once: true }));
+  ['click','pointerdown','touchend','touchstart'].forEach(e => document.addEventListener(e, onInteraction, { once: true }));
 } else if (!sessionStorage.getItem('musicPlaying')) {
   const onFirst = () => {
     tryPlay();
-    ['click','scroll','touchstart'].forEach(e => document.removeEventListener(e, onFirst));
+    ['click','pointerdown','touchend','touchstart'].forEach(e => document.removeEventListener(e, onFirst));
   };
-  ['click','scroll','touchstart'].forEach(e => document.addEventListener(e, onFirst, { once: true }));
+  ['click','pointerdown','touchend','touchstart'].forEach(e => document.addEventListener(e, onFirst, { once: true }));
 }
 
 btn.addEventListener('click', (e) => {
